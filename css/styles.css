@@ -1,24 +1,95 @@
-.glow-text {
-    text-shadow: 0 0 10px rgba(74, 222, 128, 0.5), 0 0 20px rgba(74, 222, 128, 0.3);
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ─── Only styles Tailwind can't handle ─────────────────────────────── */
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-.glow-border {
-    box-shadow: 0 0 15px rgba(74, 222, 128, 0.1);
+.font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
 }
 
-.scanline {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 9999;
-    background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0, 0, 0, 0.03) 2px,
-        rgba(0, 0, 0, 0.03) 4px
-    );
+/* Skip link */
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 16px;
+    z-index: 10000;
+    padding: 12px 24px;
+    background: #10b981;
+    color: #022c22;
+    border-radius: 0 0 8px 8px;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    transition: top 0.2s ease;
+}
+.skip-link:focus { top: 0; }
+
+/* Nav scroll state */
+.nav-fixed.scrolled {
+    background: rgba(5, 10, 20, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(52, 211, 153, 0.06);
+}
+
+/* Gradient name */
+.gradient-text {
+    background: linear-gradient(135deg, #34d399, #38bdf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Section label line */
+.section-label::after {
+    content: '';
+    display: block;
+    flex: 1;
+    max-width: 200px;
+    height: 1px;
+    background: linear-gradient(to right, rgba(52, 211, 153, 0.3), transparent);
+}
+
+/* Skill card prefix */
+.skill-card-title::before {
+    content: '//';
+    color: #475569;
+    font-weight: 400;
+}
+
+/* Scroll indicator animation */
+@keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+    50% { opacity: 1; transform: scaleY(1); }
+}
+.scroll-line {
+    animation: scrollPulse 2s ease-in-out infinite;
+}
+
+/* GSAP reveal states */
+.reveal { opacity: 0; transform: translateY(30px); }
+.reveal-left { opacity: 0; transform: translateX(-30px); }
+
+/* Focus */
+*:focus-visible {
+    outline: 2px solid #34d399;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    .reveal, .reveal-left { opacity: 1 !important; transform: none !important; }
+    .scroll-line { animation: none; opacity: 0.5; }
 }

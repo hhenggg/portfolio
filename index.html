@@ -3,386 +3,315 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chhim Heng Heng - Portfolio</title>
+    <title>Chhim Heng Heng — Software Engineer Portfolio</title>
+    <meta name="description" content="Portfolio of Chhim Heng Heng — Computer Science student and full-stack developer specializing in PHP, Laravel, Flutter, and AI/ML integration.">
+    <meta property="og:title" content="Chhim Heng Heng — Software Engineer Portfolio">
+    <meta property="og:description" content="Computer Science student and full-stack developer. Explore my projects, skills, and background.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#050a14">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨</text></svg>">
 
-    <!-- Styles -->
+    <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS  -->
     <link rel="stylesheet" href="css/styles.css">
 
-    <!-- Libraries -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
-<body>
-<div id="root"></div>
-<div class="scanline"></div>
+<body class="bg-[#050a14] text-slate-200 overflow-x-hidden">
 
-<!-- GSAP Animation Functions (plain JS, no JSX) -->
-<script src="js/animations.js"></script>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
-<!-- React App (must be inline for Babel standalone to work from file://) -->
-<script type="text/babel">
-    const { useState, useEffect, useRef, useCallback } = React;
+<!-- ─── Fixed Navigation ─────────────────────────────────────────── -->
 
-    // ─── Icon Components ─────────────────────────────────────────────
+<nav class="nav-fixed fixed top-0 left-0 right-0 z-50 px-6 py-5 flex justify-between items-center transition-all duration-300" aria-label="Main navigation">
+    <a href="#hero" class="font-mono text-sm font-semibold text-emerald-400 no-underline tracking-wider">HH.</a>
+    <ul class="flex gap-1 sm:gap-2 list-none m-0 p-0">
+        <li><button class="nav-link font-mono text-sm text-slate-500 hover:text-slate-200 hover:bg-white/5 px-3 py-2 sm:px-4 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent active" data-section="hero">Home</button></li>
+        <li><button class="nav-link font-mono text-sm text-slate-500 hover:text-slate-200 hover:bg-white/5 px-3 py-2 sm:px-4 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent" data-section="about">About</button></li>
+        <li><button class="nav-link font-mono text-sm text-slate-500 hover:text-slate-200 hover:bg-white/5 px-3 py-2 sm:px-4 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent" data-section="skills">Skills</button></li>
+        <li><button class="nav-link font-mono text-sm text-slate-500 hover:text-slate-200 hover:bg-white/5 px-3 py-2 sm:px-4 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent" data-section="projects">Projects</button></li>
+        <li><button class="nav-link font-mono text-sm text-slate-500 hover:text-slate-200 hover:bg-white/5 px-3 py-2 sm:px-4 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent" data-section="education">Education</button></li>
+    </ul>
+</nav>
 
-    const Terminal = () => (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-            <polyline points="4 17 10 11 4 5"></polyline>
-            <line x1="12" y1="19" x2="20" y2="19"></line>
-        </svg>
-    );
+<main id="main-content">
 
-    const Code = () => (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-            <polyline points="16 18 22 12 16 6"></polyline>
-            <polyline points="8 6 2 12 8 18"></polyline>
-        </svg>
-    );
+    <!-- ─── Hero ─────────────────────────────────────────────────── -->
 
-    const Briefcase = () => (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-        </svg>
-    );
+    <section id="hero" class="min-h-dvh w-full flex items-center justify-center relative px-6 md:px-12 lg:px-16 py-20">
+        <div class="w-full max-w-5xl mx-auto hero-content">
+            <p class="font-mono text-base text-emerald-400 tracking-widest uppercase mb-5 flex items-center gap-3">
+                <span class="block w-8 h-px bg-emerald-400"></span>
+                Hi, my name is
+            </p>
+            <h1 class="font-sans text-[clamp(40px,8vw,80px)] font-bold text-slate-100 leading-[1.05] tracking-tight mb-4">
+                <span class="line block">Chhim</span>
+                <span class="line block"><span class="gradient-text">Heng Heng</span>.</span>
+            </h1>
+            <p class="text-[clamp(18px,2.5vw,24px)] font-light text-slate-400 max-w-xl leading-relaxed mb-10">
+                Computer Science student who builds full-stack applications and explores the edge of AI/ML — turning ideas into software that works.
+            </p>
+            <div class="flex flex-wrap gap-3">
+                <a href="mailto:henghengc07@gmail.com" class="hero-link inline-flex items-center gap-2 font-mono text-base text-slate-400 no-underline px-5 py-3 border border-slate-700/40 rounded-lg hover:text-slate-200 hover:border-emerald-500/30 hover:bg-emerald-500/5 hover:-translate-y-0.5 transition-all duration-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    Email
+                </a>
+                <a href="https://www.linkedin.com/in/heng-h-chhim-6528b2255/" target="_blank" rel="noopener noreferrer" class="hero-link inline-flex items-center gap-2 font-mono text-base text-slate-400 no-underline px-5 py-3 border border-slate-700/40 rounded-lg hover:text-slate-200 hover:border-emerald-500/30 hover:bg-emerald-500/5 hover:-translate-y-0.5 transition-all duration-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                    LinkedIn
+                </a>
+            </div>
+        </div>
+        <div class="scroll-indicator absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-600" aria-hidden="true">
+            <span class="font-mono text-[11px] tracking-widest">SCROLL</span>
+            <div class="scroll-line w-px h-10 bg-gradient-to-b from-slate-600 to-transparent"></div>
+        </div>
+    </section>
 
-    const GraduationCap = () => (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
-        </svg>
-    );
+    <!-- ─── About ────────────────────────────────────────────────── -->
 
-    const Mail = ({ className }) => (
-        <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-            <polyline points="22,6 12,13 2,6"></polyline>
-        </svg>
-    );
+    <section id="about" class="min-h-dvh w-full flex items-center justify-center px-6 md:px-12 lg:px-16 py-20">
+        <div class="w-full max-w-5xl mx-auto">
+            <p class="section-label font-mono text-sm font-medium text-emerald-400 tracking-[0.15em] uppercase mb-3 flex items-center gap-3 reveal">01 — About</p>
+            <h2 class="font-sans text-[clamp(28px,5vw,44px)] font-bold text-slate-100 tracking-tight leading-tight mb-12 reveal">A bit about<br>who I am.</h2>
+            <div class="text-[clamp(18px,2.2vw,22px)] font-light text-slate-300 leading-[1.8] max-w-2xl reveal">
+                <p class="mb-6">
+                    I'm a Computer Science student at <strong class="text-slate-100 font-medium">Paragon International University</strong> in Phnom Penh, focused on the intersection of <span class="text-emerald-400">Full-Stack Engineering</span> and <span class="text-emerald-400">Artificial Intelligence</span>.
+                </p>
+                <p class="mb-6">
+                    I build data-driven applications with PHP and Laravel, deploy production environments with Nginx and PM2, and lately I've been diving into Flutter for cross-platform mobile development.
+                </p>
+                <p>
+                    My current focus is expanding into <span class="text-emerald-400">AI/ML integration</span> — building and deploying intelligent systems that solve real-world problems through scalable, well-architected software.
+                </p>
+            </div>
+        </div>
+    </section>
 
-    const Linkedin = ({ className }) => (
-        <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-            <rect x="2" y="9" width="4" height="12"></rect>
-            <circle cx="4" cy="4" r="2"></circle>
-        </svg>
-    );
+    <div class="w-full max-w-5xl mx-auto h-px bg-gradient-to-r from-transparent via-slate-800/50 to-transparent"></div>
 
-    const ChevronRight = ({ className }) => (
-        <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-            <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
-    );
+    <!-- ─── Skills ───────────────────────────────────────────────── -->
 
-    // ─── Main App Component ──────────────────────────────────────────
+    <section id="skills" class="min-h-dvh w-full flex items-center justify-center px-6 md:px-12 lg:px-16 py-20">
+        <div class="w-full max-w-5xl mx-auto">
+            <p class="section-label font-mono text-sm font-medium text-emerald-400 tracking-[0.15em] uppercase mb-3 flex items-center gap-3 reveal">02 — Skills</p>
+            <h2 class="font-sans text-[clamp(28px,5vw,44px)] font-bold text-slate-100 tracking-tight leading-tight mb-12 reveal">Technologies I<br>work with.</h2>
+            <div class="skills-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5">
 
-    function PortfolioTerminal() {
-        const [activeSection, setActiveSection] = useState('about');
-        const [bootComplete, setBootComplete] = useState(false);
-
-        const terminalRef = useRef(null);
-        const headerRef = useRef(null);
-        const titleBarRef = useRef(null);
-        const nameRef = useRef(null);
-        const subtitleRef = useRef(null);
-        const linksRef = useRef(null);
-        const navRef = useRef(null);
-        const contentRef = useRef(null);
-        const footerRef = useRef(null);
-        const cursorRef = useRef(null);
-        const whoamiRef = useRef(null);
-        const bootLinesRef = useRef(null);
-
-        // Boot sequence animation
-        useEffect(() => {
-            const tl = createBootTimeline({
-                terminal: terminalRef.current,
-                header: headerRef.current,
-                nav: navRef.current,
-                content: contentRef.current,
-                footer: footerRef.current,
-                bootLines: bootLinesRef.current,
-                whoami: whoamiRef.current,
-                cursor: cursorRef.current,
-                name: nameRef.current,
-                subtitle: subtitleRef.current,
-            }, () => setBootComplete(true));
-
-            return () => tl.kill();
-        }, []);
-
-        // Section transition animation
-        useEffect(() => {
-            if (!bootComplete || !contentRef.current) return;
-            const ctx = createSectionTransition(contentRef.current);
-            return () => ctx.revert();
-        }, [activeSection, bootComplete]);
-
-        // Nav button hover
-        const handleNavHover = useCallback((e, isEnter) => {
-            animateNavHover(e.currentTarget, isEnter);
-        }, []);
-
-        const sections = {
-            about: { title: 'about.sh', icon: <Terminal /> },
-            skills: { title: 'skills.json', icon: <Code /> },
-            projects: { title: 'projects.log', icon: <Briefcase /> },
-            education: { title: 'education.txt', icon: <GraduationCap /> }
-        };
-
-        return (
-            <div className="min-h-screen bg-black text-green-400 font-mono p-4 md:p-8">
-                <div className="max-w-7xl mx-auto" ref={terminalRef} style={{ opacity: 0 }}>
-                    <div ref={titleBarRef} className="bg-gray-900 rounded-t-lg border border-gray-800 p-3 flex items-center gap-2">
-                        <div className="flex gap-2">
-                            <div className="traffic-light w-3 h-3 rounded-full bg-red-500"></div>
-                            <div className="traffic-light w-3 h-3 rounded-full bg-yellow-500"></div>
-                            <div className="traffic-light w-3 h-3 rounded-full bg-green-500"></div>
-                        </div>
-                        <span className="text-gray-500 text-sm ml-4">heng@portfolio:~</span>
+                <div class="skill-card p-7 rounded-2xl bg-slate-900/40 border border-slate-800/50 hover:border-emerald-500/15 hover:-translate-y-0.5 transition-all duration-300">
+                    <h3 class="skill-card-title font-mono text-base font-semibold text-amber-300 mb-4 flex items-center gap-2">Programming Languages</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">C++</span>
+                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Java</span>
+                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">PHP</span>
+                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">JavaScript</span>
+                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Dart</span>
                     </div>
+                </div>
 
-                    <div className="bg-gray-950 border-x border-b border-gray-800 rounded-b-lg p-6 md:p-8 min-h-[80vh]">
+                <div class="skill-card p-7 rounded-2xl bg-slate-900/40 border border-slate-800/50 hover:border-emerald-500/15 hover:-translate-y-0.5 transition-all duration-300">
+                    <h3 class="skill-card-title font-mono text-base font-semibold text-amber-300 mb-4 flex items-center gap-2">Web Development</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Laravel</span>
+                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Nuxt.js</span>
+                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Tailwind CSS</span>
+                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">HTML/CSS</span>
+                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Bootstrap 5</span>
+                    </div>
+                </div>
 
-                        {/* Boot sequence */}
-                        <div ref={bootLinesRef} style={{ opacity: 0 }} className="mb-4 text-sm">
-                            <p className="boot-line text-gray-600">[OK] Starting terminal emulator...</p>
-                            <p className="boot-line text-gray-600">[OK] Loading profile: heng@portfolio</p>
-                            <p className="boot-line text-gray-600">[OK] Mounting /home/heng/projects</p>
-                            <p className="boot-line text-gray-600">[OK] Initializing environment variables</p>
-                            <p className="boot-line text-green-600">[READY] Session active. Welcome back, Heng.</p>
-                        </div>
+                <div class="skill-card p-7 rounded-2xl bg-slate-900/40 border border-slate-800/50 hover:border-emerald-500/15 hover:-translate-y-0.5 transition-all duration-300">
+                    <h3 class="skill-card-title font-mono text-base font-semibold text-amber-300 mb-4 flex items-center gap-2">Mobile Development</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Flutter</span>
+                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Dart</span>
+                    </div>
+                </div>
 
-                        {/* Header */}
-                        <div ref={headerRef} className="mb-8">
-                            <p className="text-green-500 mb-2">
-                                <span ref={whoamiRef}></span>
-                                <span ref={cursorRef} className="animate-pulse" style={{ opacity: 0 }}>▊</span>
-                            </p>
-                            <p ref={nameRef} className="text-white text-2xl md:text-3xl font-bold mb-2 glow-text" style={{ opacity: 0 }}>
-                                CHHIM HENG HENG
-                            </p>
-                            <p ref={subtitleRef} className="text-gray-400 mb-4" style={{ opacity: 0 }}>
-                                Computer Science Student @ Paragon International University
-                            </p>
-                            <div ref={linksRef} className="flex flex-wrap gap-4 text-sm">
-                                <a href="mailto:henghengc07@gmail.com" className="contact-link flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors" style={{ opacity: 0 }}>
-                                    <Mail className="w-4 h-4" />
-                                    <span>henghengc07@gmail.com</span>
-                                </a>
-                                <a href="https://www.linkedin.com/in/heng-h-chhim-6528b2255/" target="_blank" rel="noopener noreferrer" className="contact-link flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors" style={{ opacity: 0 }}>
-                                    <Linkedin className="w-4 h-4" />
-                                    <span>LinkedIn</span>
-                                </a>
-                            </div>
-                        </div>
+                <div class="skill-card p-7 rounded-2xl bg-slate-900/40 border border-slate-800/50 hover:border-emerald-500/15 hover:-translate-y-0.5 transition-all duration-300">
+                    <h3 class="skill-card-title font-mono text-base font-semibold text-amber-300 mb-4 flex items-center gap-2">Backend & Runtime</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Node.js</span>
+                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Express.js</span>
+                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">REST API</span>
+                    </div>
+                </div>
 
-                        {/* Navigation */}
-                        <div ref={navRef} className="flex flex-wrap gap-2 mb-6 border-b border-gray-800 pb-4" style={{ opacity: 0 }}>
-                            {Object.entries(sections).map(([key, { title, icon }]) => (
-                                <button
-                                    key={key}
-                                    onClick={() => setActiveSection(key)}
-                                    onMouseEnter={(e) => handleNavHover(e, true)}
-                                    onMouseLeave={(e) => handleNavHover(e, false)}
-                                    className={`nav-btn flex items-center gap-2 px-4 py-2 rounded transition-colors ${
-                                        activeSection === key
-                                            ? 'bg-green-500 text-black glow-border'
-                                            : 'bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-green-400'
-                                    }`}
-                                    style={{ opacity: 0 }}
-                                >
-                                    {icon}
-                                    <span>{title}</span>
-                                </button>
-                            ))}
-                        </div>
+                <div class="skill-card p-7 rounded-2xl bg-slate-900/40 border border-slate-800/50 hover:border-emerald-500/15 hover:-translate-y-0.5 transition-all duration-300">
+                    <h3 class="skill-card-title font-mono text-base font-semibold text-amber-300 mb-4 flex items-center gap-2">Cloud & DevOps</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Digital Ocean</span>
+                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Nginx</span>
+                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">PM2</span>
+                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Linux</span>
+                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">SSH</span>
+                    </div>
+                </div>
 
-                        {/* Content */}
-                        <div ref={contentRef} className="space-y-6" style={{ opacity: 0 }}>
-                            {activeSection === 'about' && (
-                                <div className="space-y-4">
-                                    <div className="section-cmd flex items-center gap-2 text-cyan-400 mb-4">
-                                        <ChevronRight className="w-4 h-4" />
-                                        <span>cat about.sh</span>
-                                    </div>
-                                    <div className="content-card bg-gray-900 border border-gray-800 rounded p-6 text-gray-300 leading-relaxed">
-                                        <p className="mb-4">
-                                            Computer Science student focused on the intersection of Full-Stack Engineering and Artificial Intelligence. Skilled in developing data-driven applications using PHP, with a strong foundation in deploying optimized environments via Nginx and PM2.
-                                        </p>
-                                        <p>
-                                            Currently expanding expertise into AI/ML integration, with a focus on building and deploying intelligent systems that solve real-world problems through scalable software.
-                                        </p>
-                                    </div>
-                                </div>
-                            )}
+                <div class="skill-card p-7 rounded-2xl bg-slate-900/40 border border-slate-800/50 hover:border-emerald-500/15 hover:-translate-y-0.5 transition-all duration-300">
+                    <h3 class="skill-card-title font-mono text-base font-semibold text-amber-300 mb-4 flex items-center gap-2">Tools</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Git/GitHub</span>
+                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">VS Code</span>
+                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">PhpStorm</span>
+                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">IntelliJ</span>
+                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Insomnia</span>
+                    </div>
+                </div>
 
-                            {activeSection === 'skills' && (
-                                <div className="space-y-4">
-                                    <div className="section-cmd flex items-center gap-2 text-cyan-400 mb-4">
-                                        <ChevronRight className="w-4 h-4" />
-                                        <span>cat skills.json</span>
-                                    </div>
-                                    <div className="grid md:grid-cols-2 gap-4">
-                                        <div className="content-card bg-gray-900 border border-gray-800 rounded p-6">
-                                            <h3 className="text-yellow-400 font-bold mb-3 flex items-center gap-2">
-                                                <span className="text-green-400">►</span> Programming Languages
-                                            </h3>
-                                            <div className="flex flex-wrap gap-2">
-                                                {['C++', 'Java', 'PHP', 'JavaScript'].map(skill => (
-                                                    <span key={skill} className="skill-tag bg-gray-800 text-green-400 px-3 py-1 rounded text-sm border border-gray-700">
-                                                        {skill}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </div>
+                <div class="skill-card p-7 rounded-2xl bg-slate-900/40 border border-slate-800/50 hover:border-emerald-500/15 hover:-translate-y-0.5 transition-all duration-300">
+                    <h3 class="skill-card-title font-mono text-base font-semibold text-amber-300 mb-4 flex items-center gap-2">Database</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">MySQL</span>
+                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">PostgreSQL</span>
+                    </div>
+                </div>
 
-                                        <div className="content-card bg-gray-900 border border-gray-800 rounded p-6">
-                                            <h3 className="text-yellow-400 font-bold mb-3 flex items-center gap-2">
-                                                <span className="text-green-400">►</span> Web Development
-                                            </h3>
-                                            <div className="flex flex-wrap gap-2">
-                                                {['Laravel', 'Nuxt.js', 'Tailwind CSS', 'HTML', 'CSS', 'Bootstrap 5'].map(skill => (
-                                                    <span key={skill} className="skill-tag bg-gray-800 text-green-400 px-3 py-1 rounded text-sm border border-gray-700">
-                                                        {skill}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </div>
+            </div>
+        </div>
+    </section>
 
-                                        <div className="content-card bg-gray-900 border border-gray-800 rounded p-6">
-                                            <h3 className="text-yellow-400 font-bold mb-3 flex items-center gap-2">
-                                                <span className="text-green-400">►</span> Cloud & DevOps
-                                            </h3>
-                                            <div className="flex flex-wrap gap-2">
-                                                {['Digital Ocean', 'Nginx', 'PM2', 'Linux (Ubuntu)', 'SSH'].map(skill => (
-                                                    <span key={skill} className="skill-tag bg-gray-800 text-green-400 px-3 py-1 rounded text-sm border border-gray-700">
-                                                        {skill}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </div>
+    <div class="w-full max-w-5xl mx-auto h-px bg-gradient-to-r from-transparent via-slate-800/50 to-transparent"></div>
 
-                                        <div className="content-card bg-gray-900 border border-gray-800 rounded p-6">
-                                            <h3 className="text-yellow-400 font-bold mb-3 flex items-center gap-2">
-                                                <span className="text-green-400">►</span> Tools & Technologies
-                                            </h3>
-                                            <div className="flex flex-wrap gap-2">
-                                                {['VS Code', 'PhpStorm', 'IntelliJ IDEA', 'Insomnia', 'Git/GitHub'].map(skill => (
-                                                    <span key={skill} className="skill-tag bg-gray-800 text-green-400 px-3 py-1 rounded text-sm border border-gray-700">
-                                                        {skill}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </div>
+    <!-- ─── Projects ─────────────────────────────────────────────── -->
 
-                                        <div className="content-card bg-gray-900 border border-gray-800 rounded p-6">
-                                            <h3 className="text-yellow-400 font-bold mb-3 flex items-center gap-2">
-                                                <span className="text-green-400">►</span> Database
-                                            </h3>
-                                            <div className="flex flex-wrap gap-2">
-                                                {['MySQL', 'PostgreSQL'].map(skill => (
-                                                    <span key={skill} className="skill-tag bg-gray-800 text-green-400 px-3 py-1 rounded text-sm border border-gray-700">
-                                                        {skill}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
+    <section id="projects" class="min-h-dvh w-full flex items-center justify-center px-6 md:px-12 lg:px-16 py-20">
+        <div class="w-full max-w-5xl mx-auto">
+            <p class="section-label font-mono text-sm font-medium text-emerald-400 tracking-[0.15em] uppercase mb-3 flex items-center gap-3 reveal">03 — Projects</p>
+            <h2 class="font-sans text-[clamp(28px,5vw,44px)] font-bold text-slate-100 tracking-tight leading-tight mb-12 reveal">Things I've<br>built.</h2>
 
-                            {activeSection === 'projects' && (
-                                <div className="space-y-4">
-                                    <div className="section-cmd flex items-center gap-2 text-cyan-400 mb-4">
-                                        <ChevronRight className="w-4 h-4" />
-                                        <span>cat projects.log</span>
-                                    </div>
-                                    <div className="content-card bg-gray-900 border border-gray-800 rounded p-6">
-                                        <h3 className="text-yellow-400 font-bold text-xl mb-2">Peer to Peer Lending Marketplace Platform</h3>
-                                        <p className="text-cyan-400 text-sm mb-4">Backend Developer | Team Project - Paragon International University</p>
+            <!-- Project 01 -->
+            <div class="project-card p-8 sm:p-9 rounded-2xl bg-slate-900/30 border border-slate-800/40 hover:border-emerald-500/10 hover:-translate-y-0.5 transition-all duration-300 mb-6">
+                <p class="font-mono text-sm text-slate-600 mb-4">01</p>
+                <h3 class="font-sans text-xl sm:text-2xl font-semibold text-slate-100 mb-1.5 leading-snug">Peer to Peer Lending Marketplace Platform</h3>
+                <p class="font-mono text-base text-emerald-400 mb-1">Backend Developer</p>
+                <p class="text-base text-slate-500 mb-5">Team Project — Paragon International University</p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="tech-tag font-mono text-xs font-medium px-3.5 py-1.5 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">Laravel</span>
+                    <span class="tech-tag font-mono text-xs font-medium px-3.5 py-1.5 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">Nuxt.js</span>
+                    <span class="tech-tag font-mono text-xs font-medium px-3.5 py-1.5 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">MySQL</span>
+                    <span class="tech-tag font-mono text-xs font-medium px-3.5 py-1.5 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">Tailwind CSS</span>
+                    <span class="tech-tag font-mono text-xs font-medium px-3.5 py-1.5 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">GitHub</span>
+                </div>
+                <ul class="list-none m-0 p-0">
+                    <li class="project-bullet flex items-start gap-3.5 py-2.5 border-b border-slate-800/30 text-base text-slate-400 leading-relaxed"><span class="text-emerald-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Developed the backend and admin dashboard for a peer-to-peer lending marketplace using Laravel and Nuxt.js</span></li>
+                    <li class="project-bullet flex items-start gap-3.5 py-2.5 border-b border-slate-800/30 text-base text-slate-400 leading-relaxed"><span class="text-emerald-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Implemented user management workflows: approving, rejecting, and managing borrower and lender accounts</span></li>
+                    <li class="project-bullet flex items-start gap-3.5 py-2.5 border-b border-slate-800/30 text-base text-slate-400 leading-relaxed"><span class="text-emerald-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Built loan request management systems with full approval/rejection processes and real-time status updates</span></li>
+                    <li class="project-bullet flex items-start gap-3.5 py-2.5 border-b border-slate-800/30 text-base text-slate-400 leading-relaxed"><span class="text-emerald-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Designed data visualization dashboards using charts and key statistics to monitor platform activity</span></li>
+                    <li class="project-bullet flex items-start gap-3.5 py-2.5 border-b border-slate-800/30 text-base text-slate-400 leading-relaxed"><span class="text-emerald-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Utilized RESTful APIs to handle data flow between the backend and frontend</span></li>
+                    <li class="project-bullet flex items-start gap-3.5 py-2.5 text-base text-slate-400 leading-relaxed"><span class="text-emerald-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Collaborated closely with frontend developers to ensure system reliability and functionality</span></li>
+                </ul>
+            </div>
 
-                                        <div className="mb-4 flex flex-wrap gap-2">
-                                            {['Laravel', 'Nuxt.js', 'MySQL', 'Tailwind CSS', 'Github'].map(tech => (
-                                                <span key={tech} className="tech-tag bg-gray-800 text-blue-400 px-3 py-1 rounded text-sm border border-blue-900">
-                                                    {tech}
-                                                </span>
-                                            ))}
-                                        </div>
+            <!-- Project 02 -->
+            <div class="project-card p-8 sm:p-9 rounded-2xl bg-slate-900/30 border border-slate-800/40 hover:border-emerald-500/10 hover:-translate-y-0.5 transition-all duration-300">
+                <p class="font-mono text-sm text-slate-600 mb-4">02</p>
+                <h3 class="font-sans text-xl sm:text-2xl font-semibold text-slate-100 mb-1.5 leading-snug">Product Management Mobile App</h3>
+                <p class="font-mono text-base text-emerald-400 mb-1">Full-Stack Developer</p>
+                <p class="text-base text-slate-500 mb-5">Team Project — Paragon International University</p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="tech-tag font-mono text-xs font-medium px-3.5 py-1.5 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">Flutter</span>
+                    <span class="tech-tag font-mono text-xs font-medium px-3.5 py-1.5 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">Dart</span>
+                    <span class="tech-tag font-mono text-xs font-medium px-3.5 py-1.5 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">Node.js</span>
+                    <span class="tech-tag font-mono text-xs font-medium px-3.5 py-1.5 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">Express.js</span>
+                    <span class="tech-tag font-mono text-xs font-medium px-3.5 py-1.5 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">PostgreSQL</span>
+                    <span class="tech-tag font-mono text-xs font-medium px-3.5 py-1.5 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">REST API</span>
+                </div>
+                <ul class="list-none m-0 p-0">
+                    <li class="project-bullet flex items-start gap-3.5 py-2.5 border-b border-slate-800/30 text-base text-slate-400 leading-relaxed"><span class="text-emerald-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Built a cross-platform mobile app with Flutter featuring full product CRUD operations connected to a Node.js/Express REST API</span></li>
+                    <li class="project-bullet flex items-start gap-3.5 py-2.5 border-b border-slate-800/30 text-base text-slate-400 leading-relaxed"><span class="text-emerald-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Designed and implemented 5 RESTful endpoints with parameterized PostgreSQL queries and connection pooling</span></li>
+                    <li class="project-bullet flex items-start gap-3.5 py-2.5 border-b border-slate-800/30 text-base text-slate-400 leading-relaxed"><span class="text-emerald-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Developed category-based product filtering with a bottom sheet UI and product detail views with edit/delete actions</span></li>
+                    <li class="project-bullet flex items-start gap-3.5 py-2.5 border-b border-slate-800/30 text-base text-slate-400 leading-relaxed"><span class="text-emerald-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Implemented user authentication flow with form validation and auth state management via a singleton AuthService</span></li>
+                    <li class="project-bullet flex items-start gap-3.5 py-2.5 border-b border-slate-800/30 text-base text-slate-400 leading-relaxed"><span class="text-emerald-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Created a dashboard with real-time product statistics including category counts and total inventory value</span></li>
+                    <li class="project-bullet flex items-start gap-3.5 py-2.5 text-base text-slate-400 leading-relaxed"><span class="text-emerald-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Built three-tab bottom navigation, loading states, error handling, remote image loading with fallbacks, and smooth animations</span></li>
+                </ul>
+            </div>
 
-                                        <div className="space-y-3 text-gray-300">
-                                            <p className="project-bullet flex items-start gap-2">
-                                                <span className="text-green-400 mt-1">●</span>
-                                                <span>Developed the backend and admin dashboard for a peer-to-peer lending marketplace using Laravel for the backend and Nuxt.js for the frontend</span>
-                                            </p>
-                                            <p className="project-bullet flex items-start gap-2">
-                                                <span className="text-green-400 mt-1">●</span>
-                                                <span>Implemented user management workflows: approving, rejecting, and managing borrower and lender accounts</span>
-                                            </p>
-                                            <p className="project-bullet flex items-start gap-2">
-                                                <span className="text-green-400 mt-1">●</span>
-                                                <span>Built loan request management systems with full approval/rejection processes and real-time status updates</span>
-                                            </p>
-                                            <p className="project-bullet flex items-start gap-2">
-                                                <span className="text-green-400 mt-1">●</span>
-                                                <span>Designed and integrated data visualization dashboards using charts and key statistics to monitor platform activity</span>
-                                            </p>
-                                            <p className="project-bullet flex items-start gap-2">
-                                                <span className="text-green-400 mt-1">●</span>
-                                                <span>Utilized RESTful APIs to efficiently handle data flow between the backend and frontend</span>
-                                            </p>
-                                            <p className="project-bullet flex items-start gap-2">
-                                                <span className="text-green-400 mt-1">●</span>
-                                                <span>Collaborated closely with frontend developers to ensure system reliability and functionality</span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
+        </div>
+    </section>
 
-                            {activeSection === 'education' && (
-                                <div className="space-y-4">
-                                    <div className="section-cmd flex items-center gap-2 text-cyan-400 mb-4">
-                                        <ChevronRight className="w-4 h-4" />
-                                        <span>cat education.txt</span>
-                                    </div>
-                                    <div className="space-y-4">
-                                        <div className="content-card bg-gray-900 border border-gray-800 rounded p-6">
-                                            <h3 className="text-yellow-400 font-bold text-lg mb-2">Bachelor of Science in Computer Science</h3>
-                                            <p className="text-gray-400 mb-1">Paragon International University | Phnom Penh</p>
-                                            <p className="text-cyan-400 text-sm">Expected Graduation: 2028</p>
-                                        </div>
+    <div class="w-full max-w-5xl mx-auto h-px bg-gradient-to-r from-transparent via-slate-800/50 to-transparent"></div>
 
-                                        <div className="content-card bg-gray-900 border border-gray-800 rounded p-6">
-                                            <h3 className="text-yellow-400 font-bold text-lg mb-2">General English Program (GEP 12)</h3>
-                                            <p className="text-gray-400">Australian Centre for Education (ACE) | Phnom Penh</p>
-                                        </div>
+    <!-- ─── Education ────────────────────────────────────────────── -->
 
-                                        <div className="content-card bg-gray-900 border border-gray-800 rounded p-6">
-                                            <h3 className="text-yellow-400 font-bold text-lg mb-2">High School Baccalaureate (Science)</h3>
-                                            <p className="text-gray-400">Preah Sisowath High School | Phnom Penh</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-
-                        {/* Footer */}
-                        <div ref={footerRef} className="mt-12 pt-6 border-t border-gray-800 text-center text-gray-500 text-sm" style={{ opacity: 0 }}>
-                            <p>$ exit</p>
-                            <p className="mt-2">&copy; 2025 Chhim Heng Heng. All rights reserved.</p>
-                        </div>
+    <section id="education" class="min-h-dvh w-full flex items-center justify-center px-6 md:px-12 lg:px-16 py-20">
+        <div class="w-full max-w-5xl mx-auto">
+            <p class="section-label font-mono text-sm font-medium text-emerald-400 tracking-[0.15em] uppercase mb-3 flex items-center gap-3 reveal">04 — Education</p>
+            <h2 class="font-sans text-[clamp(28px,5vw,44px)] font-bold text-slate-100 tracking-tight leading-tight mb-12 reveal">Where I've<br>studied.</h2>
+            <div class="flex flex-col">
+                <div class="edu-item flex gap-6 py-8 border-b border-slate-800/40 items-start">
+                    <div class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.3)] shrink-0 mt-1.5" aria-hidden="true"></div>
+                    <div>
+                        <h3 class="font-sans text-xl font-semibold text-slate-100 mb-1">Bachelor of Science in Computer Science</h3>
+                        <p class="text-base text-slate-400 mb-1">Paragon International University — Phnom Penh</p>
+                        <p class="font-mono text-sm text-emerald-400 font-medium">Expected Graduation: 2028</p>
+                    </div>
+                </div>
+                <div class="edu-item flex gap-6 py-8 border-b border-slate-800/40 items-start">
+                    <div class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.3)] shrink-0 mt-1.5" aria-hidden="true"></div>
+                    <div>
+                        <h3 class="font-sans text-xl font-semibold text-slate-100 mb-1">General English Program (GEP 12)</h3>
+                        <p class="text-base text-slate-400">Australian Centre for Education (ACE) — Phnom Penh</p>
+                    </div>
+                </div>
+                <div class="edu-item flex gap-6 py-8 items-start">
+                    <div class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.3)] shrink-0 mt-1.5" aria-hidden="true"></div>
+                    <div>
+                        <h3 class="font-sans text-xl font-semibold text-slate-100 mb-1">High School Baccalaureate (Science)</h3>
+                        <p class="text-base text-slate-400">Preah Sisowath High School — Phnom Penh</p>
                     </div>
                 </div>
             </div>
-        );
-    }
+        </div>
+    </section>
 
-    ReactDOM.render(<PortfolioTerminal />, document.getElementById('root'));
-</script>
+    <div class="w-full max-w-5xl mx-auto h-px bg-gradient-to-r from-transparent via-slate-800/50 to-transparent"></div>
+
+    <!-- ─── Contact / Footer ─────────────────────────────────────── -->
+
+    <section id="contact" class="min-h-[50dvh] w-full flex items-center justify-center px-6 md:px-12 lg:px-16 py-20">
+        <div class="w-full max-w-5xl mx-auto">
+            <p class="section-label font-mono text-sm font-medium text-emerald-400 tracking-[0.15em] uppercase mb-3 flex items-center gap-3 reveal">05 — Contact</p>
+            <h2 class="font-sans text-[clamp(28px,5vw,48px)] font-bold text-slate-100 tracking-tight leading-tight mb-8 reveal">
+                Let's build<br><span class="text-slate-600">something together.</span>
+            </h2>
+            <div class="flex flex-wrap gap-4 mb-16 reveal">
+                <a href="mailto:henghengc07@gmail.com" class="inline-flex items-center gap-2 font-mono text-base text-emerald-400 no-underline px-6 py-3 border border-emerald-500/20 rounded-lg hover:bg-emerald-500/8 hover:border-emerald-500/40 hover:-translate-y-0.5 transition-all duration-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    henghengc07@gmail.com
+                </a>
+                <a href="https://www.linkedin.com/in/heng-h-chhim-6528b2255/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-mono text-base text-emerald-400 no-underline px-6 py-3 border border-emerald-500/20 rounded-lg hover:bg-emerald-500/8 hover:border-emerald-500/40 hover:-translate-y-0.5 transition-all duration-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                    LinkedIn
+                </a>
+            </div>
+            <footer>
+                <p class="font-mono text-sm text-slate-700">&copy; <script>document.write(new Date().getFullYear())</script> Chhim Heng Heng. All rights reserved.</p>
+            </footer>
+        </div>
+    </section>
+
+</main>
+
+<!-- Animations -->
+<script src="js/animations.js"></script>
+<script>initAnimations();</script>
+
 </body>
 </html>

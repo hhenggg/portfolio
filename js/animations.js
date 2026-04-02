@@ -1,158 +1,267 @@
-gsap.registerPlugin(TextPlugin);
+gsap.registerPlugin(ScrollTrigger);
 
-/**
- * Boot sequence timeline animation.
- * Animates terminal window in, boot lines, whoami typing, name reveal, and nav.
- */
-function createBootTimeline(refs, onComplete) {
-    const tl = gsap.timeline({ onComplete });
+/* ─── Reduced Motion Check ──────────────────────────────────────────── */
 
-    // Initial state - everything hidden
-    gsap.set([refs.header, refs.nav, refs.content, refs.footer], {
-        opacity: 0,
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (prefersReducedMotion) {
+    gsap.globalTimeline.timeScale(100);
+}
+
+/* ─── Smooth Scroll (Lenis-lite via GSAP) ───────────────────────────── */
+
+// Sync ScrollTrigger with native scroll
+ScrollTrigger.defaults({
+    toggleActions: 'play none none none',
+});
+
+/* ─── Nav Scroll Effect ─────────────────────────────────────────────── */
+
+function initNavScroll() {
+    const nav = document.querySelector('.nav-fixed');
+    if (!nav) return;
+
+    ScrollTrigger.create({
+        start: 80,
+        onUpdate: (self) => {
+            nav.classList.toggle('scrolled', self.scroll() > 80);
+        }
     });
 
-    // Terminal window scales in
-    tl.fromTo(refs.terminal,
-        { scale: 0.8, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.6, ease: "power3.out" }
+    // Active link tracking
+    const sections = ['hero', 'about', 'skills', 'projects', 'education', 'contact'];
+    sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+
+        ScrollTrigger.create({
+            trigger: el,
+            start: 'top center',
+            end: 'bottom center',
+            onEnter: () => setActiveNav(id),
+            onEnterBack: () => setActiveNav(id),
+        });
+    });
+}
+
+function setActiveNav(id) {
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.toggle('active', link.dataset.section === id);
+    });
+}
+
+/* ─── Hero Animations ───────────────────────────────────────────────── */
+
+function initHeroAnimations() {
+    const tl = gsap.timeline({ delay: 0.2 });
+
+    tl.fromTo('.hero-greeting',
+        { opacity: 0, x: -20 },
+        { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out' }
     );
 
-    // Title bar dots animate
-    tl.fromTo(".traffic-light",
-        { scale: 0 },
-        { scale: 1, duration: 0.3, stagger: 0.1, ease: "back.out(2)" },
-        "-=0.2"
+    tl.fromTo('.hero-name .line',
+        { opacity: 0, y: 40, skewY: 2 },
+        { opacity: 1, y: 0, skewY: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out' },
+        '-=0.2'
     );
 
-    // Boot text lines
-    if (refs.bootLines) {
-        tl.to(refs.bootLines, { opacity: 1, duration: 0.1 });
+    tl.fromTo('.hero-subtitle',
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
+        '-=0.3'
+    );
 
-        const lines = refs.bootLines.querySelectorAll('.boot-line');
-        tl.fromTo(lines,
-            { opacity: 0, x: -10 },
-            { opacity: 1, x: 0, duration: 0.08, stagger: 0.12, ease: "none" },
-            "+=0.2"
+    tl.fromTo('.hero-link',
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.4, stagger: 0.1, ease: 'power2.out' },
+        '-=0.2'
+    );
+
+    tl.fromTo('.scroll-indicator',
+        { opacity: 0 },
+        { opacity: 1, duration: 0.6 },
+        '-=0.1'
+    );
+
+    // Parallax on hero text as user scrolls down
+    if (!prefersReducedMotion) {
+        gsap.to('.hero-content', {
+            y: -80,
+            opacity: 0,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '#hero',
+                start: 'top top',
+                end: 'bottom top',
+                scrub: 0.5,
+            }
+        });
+    }
+}
+
+/* ─── Scroll Reveal ─────────────────────────────────────────────────── */
+
+function initScrollReveals() {
+    // Generic reveal up
+    gsap.utils.toArray('.reveal').forEach(el => {
+        gsap.fromTo(el,
+            { opacity: 0, y: 30 },
+            {
+                opacity: 1, y: 0,
+                duration: 0.7,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 85%',
+                    once: true,
+                }
+            }
         );
+    });
 
-        // Fade out boot lines
-        tl.to(refs.bootLines, { opacity: 0, height: 0, duration: 0.4, ease: "power2.in" }, "+=0.5");
+    // Reveal from left
+    gsap.utils.toArray('.reveal-left').forEach(el => {
+        gsap.fromTo(el,
+            { opacity: 0, x: -30 },
+            {
+                opacity: 1, x: 0,
+                duration: 0.7,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 85%',
+                    once: true,
+                }
+            }
+        );
+    });
+
+    // Reveal with scale
+    gsap.utils.toArray('.reveal-scale').forEach(el => {
+        gsap.fromTo(el,
+            { opacity: 0, scale: 0.95 },
+            {
+                opacity: 1, scale: 1,
+                duration: 0.6,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 85%',
+                    once: true,
+                }
+            }
+        );
+    });
+}
+
+/* ─── Staggered Children ────────────────────────────────────────────── */
+
+function initStaggerReveals() {
+    // Skill cards
+    const skillsGrid = document.querySelector('.skills-grid');
+    if (skillsGrid) {
+        gsap.fromTo(skillsGrid.children,
+            { opacity: 0, y: 30 },
+            {
+                opacity: 1, y: 0,
+                duration: 0.5,
+                stagger: 0.08,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: skillsGrid,
+                    start: 'top 80%',
+                    once: true,
+                }
+            }
+        );
     }
 
-    // Typing animation for whoami
-    tl.to(refs.header, { opacity: 1, duration: 0.1 });
-    tl.fromTo(refs.whoami,
-        { text: "" },
-        { text: "$ whoami", duration: 0.8, ease: "none" },
-        "+=0.1"
-    );
+    // Project cards
+    gsap.utils.toArray('.project-card').forEach(card => {
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: card,
+                start: 'top 82%',
+                once: true,
+            }
+        });
 
-    // Cursor blink
-    tl.to(refs.cursor, { opacity: 1, duration: 0.1 });
+        tl.fromTo(card,
+            { opacity: 0, y: 40 },
+            { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }
+        );
 
-    // Name glitch in
-    tl.fromTo(refs.name,
-        { opacity: 0, y: 20, skewX: -10 },
-        { opacity: 1, y: 0, skewX: 0, duration: 0.5, ease: "power3.out" },
-        "+=0.3"
-    );
+        tl.fromTo(card.querySelectorAll('.tech-tag'),
+            { opacity: 0, scale: 0.8 },
+            { opacity: 1, scale: 1, duration: 0.3, stagger: 0.04, ease: 'back.out(1.5)' },
+            '-=0.3'
+        );
 
-    // Name glow pulse
-    tl.fromTo(refs.name,
-        { textShadow: "0 0 0px rgba(74, 222, 128, 0)" },
-        { textShadow: "0 0 20px rgba(74, 222, 128, 0.6), 0 0 40px rgba(74, 222, 128, 0.3)", duration: 0.6, ease: "power2.out" }
-    );
-    tl.to(refs.name,
-        { textShadow: "0 0 10px rgba(74, 222, 128, 0.3)", duration: 0.4 }
-    );
+        tl.fromTo(card.querySelectorAll('.project-bullet'),
+            { opacity: 0, x: -12 },
+            { opacity: 1, x: 0, duration: 0.3, stagger: 0.05, ease: 'power2.out' },
+            '-=0.2'
+        );
+    });
 
-    // Subtitle fade in
-    tl.fromTo(refs.subtitle,
-        { opacity: 0, y: 10 },
-        { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
-        "-=0.2"
-    );
-
-    // Contact links stagger in
-    tl.fromTo(".contact-link",
-        { opacity: 0, x: -20 },
-        { opacity: 1, x: 0, duration: 0.3, stagger: 0.15, ease: "power2.out" },
-        "-=0.1"
-    );
-
-    // Nav buttons slide in
-    tl.to(refs.nav, { opacity: 1, duration: 0.1 });
-    tl.fromTo(".nav-btn",
-        { opacity: 0, y: 20, scale: 0.8 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.4, stagger: 0.1, ease: "back.out(1.5)" },
-        "-=0.1"
-    );
-
-    // Content area
-    tl.to(refs.content, { opacity: 1, duration: 0.3 });
+    // Education items
+    gsap.utils.toArray('.edu-item').forEach((item, i) => {
+        gsap.fromTo(item,
+            { opacity: 0, x: -20 },
+            {
+                opacity: 1, x: 0,
+                duration: 0.6,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 85%',
+                    once: true,
+                },
+                delay: i * 0.1
+            }
+        );
+    });
 
     // Footer
-    tl.fromTo(refs.footer,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.5 },
-        "-=0.2"
-    );
-
-    return tl;
+    const footerCta = document.querySelector('.footer-cta');
+    if (footerCta) {
+        gsap.fromTo(footerCta,
+            { opacity: 0, y: 30 },
+            {
+                opacity: 1, y: 0,
+                duration: 0.7,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: footerCta,
+                    start: 'top 85%',
+                    once: true,
+                }
+            }
+        );
+    }
 }
 
-/**
- * Section transition animation.
- * Animates content cards, skill tags, project bullets, and tech tags.
- */
-function createSectionTransition(contentEl) {
-    return gsap.context(() => {
-        const tl = gsap.timeline();
+/* ─── Smooth scroll for nav links ───────────────────────────────────── */
 
-        // Command line
-        tl.fromTo(".section-cmd",
-            { opacity: 0, x: -30 },
-            { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }
-        );
-
-        // Content cards stagger
-        tl.fromTo(".content-card",
-            { opacity: 0, y: 30, scale: 0.95 },
-            { opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.12, ease: "power3.out" },
-            "-=0.2"
-        );
-
-        // Skill tags pop in
-        tl.fromTo(".skill-tag",
-            { opacity: 0, scale: 0 },
-            { opacity: 1, scale: 1, duration: 0.3, stagger: 0.04, ease: "back.out(2)" },
-            "-=0.3"
-        );
-
-        // Project bullets slide in
-        tl.fromTo(".project-bullet",
-            { opacity: 0, x: -20 },
-            { opacity: 1, x: 0, duration: 0.3, stagger: 0.08, ease: "power2.out" },
-            "-=0.2"
-        );
-
-        // Tech tags
-        tl.fromTo(".tech-tag",
-            { opacity: 0, y: 10 },
-            { opacity: 1, y: 0, duration: 0.3, stagger: 0.06, ease: "power2.out" },
-            "-=0.3"
-        );
-    }, contentEl);
-}
-
-/**
- * Nav button hover animation.
- */
-function animateNavHover(element, isEnter) {
-    gsap.to(element, {
-        scale: isEnter ? 1.05 : 1,
-        duration: 0.2,
-        ease: "power2.out"
+function initSmoothNav() {
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = document.getElementById(link.dataset.section);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
     });
+}
+
+/* ─── Init All ──────────────────────────────────────────────────────── */
+
+function initAnimations() {
+    initNavScroll();
+    initHeroAnimations();
+    initScrollReveals();
+    initStaggerReveals();
+    initSmoothNav();
 }
