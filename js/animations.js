@@ -50,22 +50,119 @@ function setActiveNav(id) {
     });
 }
 
+/* ─── Video Intro → Black → Hero (loops) ──────────────────────────── */
+
+function initVideoIntro() {
+    const video = document.getElementById('hero-video');
+    const blackOverlay = document.getElementById('hero-black-overlay');
+    const heroContent = document.querySelector('.hero-content');
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+
+    if (!video || !blackOverlay) {
+        initHeroAnimations();
+        return;
+    }
+
+    let revealed = false;
+
+    function fadeToBlackThenReveal() {
+        if (revealed) return;
+        revealed = true;
+        gsap.to(blackOverlay, {
+            opacity: 1,
+            duration: 0.3,
+            ease: 'power2.inOut',
+            onComplete: () => {
+                initHeroAnimations();
+                // After 20s, fade out text → replay video → repeat
+                setTimeout(replayLoop, 20000);
+            },
+        });
+    }
+
+    function replayLoop() {
+        // Fade out hero content
+        const els = heroContent.querySelectorAll('.hero-greeting, .bracket-corner, .hero-name .line, .hero-subtitle, .hero-link');
+        const fadeOut = gsap.timeline({
+            onComplete: () => {
+                // Also hide scroll indicator
+                gsap.set(scrollIndicator, { opacity: 0 });
+                // Fade out the black overlay to reveal the video
+                gsap.to(blackOverlay, {
+                    opacity: 0,
+                    duration: 0.5,
+                    ease: 'power2.inOut',
+                    onComplete: () => {
+                        // Reset and replay video
+                        revealed = false;
+                        video.currentTime = 0;
+                        video.play();
+                    },
+                });
+            },
+        });
+        fadeOut.to(els, {
+            opacity: 0,
+            y: -20,
+            duration: 0.5,
+            stagger: 0.03,
+            ease: 'power2.in',
+        });
+    }
+
+    // Trigger transition 3s before the video ends
+    video.addEventListener('timeupdate', () => {
+        if (video.duration && isFinite(video.duration) && video.currentTime >= video.duration - 3) {
+            fadeToBlackThenReveal();
+        }
+    });
+
+    video.addEventListener('ended', () => fadeToBlackThenReveal());
+
+    video.addEventListener('error', () => initHeroAnimations());
+}
+
 /* ─── Hero Animations ───────────────────────────────────────────────── */
 
 function initHeroAnimations() {
-    const tl = gsap.timeline({ delay: 0.2 });
+    const tl = gsap.timeline({ delay: 0 });
 
+    // 1. Greeting fades in
     tl.fromTo('.hero-greeting',
         { opacity: 0, x: -20 },
         { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out' }
     );
 
-    tl.fromTo('.hero-name .line',
-        { opacity: 0, y: 40, skewY: 2 },
-        { opacity: 1, y: 0, skewY: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out' },
-        '-=0.2'
+    // 2. Corner brackets draw in (scale from 0 → 1 along their edges)
+    tl.fromTo('.bracket-tl',
+        { opacity: 0, scaleX: 0, scaleY: 0, transformOrigin: 'top left' },
+        { opacity: 1, scaleX: 1, scaleY: 1, duration: 0.4, ease: 'power3.out' },
+        '-=0.1'
+    );
+    tl.fromTo('.bracket-tr',
+        { opacity: 0, scaleX: 0, scaleY: 0, transformOrigin: 'top right' },
+        { opacity: 1, scaleX: 1, scaleY: 1, duration: 0.4, ease: 'power3.out' },
+        '-=0.3'
+    );
+    tl.fromTo('.bracket-bl',
+        { opacity: 0, scaleX: 0, scaleY: 0, transformOrigin: 'bottom left' },
+        { opacity: 1, scaleX: 1, scaleY: 1, duration: 0.4, ease: 'power3.out' },
+        '-=0.3'
+    );
+    tl.fromTo('.bracket-br',
+        { opacity: 0, scaleX: 0, scaleY: 0, transformOrigin: 'bottom right' },
+        { opacity: 1, scaleX: 1, scaleY: 1, duration: 0.4, ease: 'power3.out' },
+        '-=0.3'
     );
 
+    // 3. Name text reveals inside the brackets
+    tl.fromTo('.hero-name .line',
+        { opacity: 0, y: 30, skewY: 2 },
+        { opacity: 1, y: 0, skewY: 0, duration: 0.6, stagger: 0.12, ease: 'power3.out' },
+        '-=0.1'
+    );
+
+    // 4. Subtitle and links
     tl.fromTo('.hero-subtitle',
         { opacity: 0, y: 20 },
         { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
@@ -83,6 +180,18 @@ function initHeroAnimations() {
         { opacity: 1, duration: 0.6 },
         '-=0.1'
     );
+
+    // Subtle glow pulse on brackets after reveal
+    if (!prefersReducedMotion) {
+        gsap.to('.bracket-corner', {
+            boxShadow: '0 0 8px rgba(52,211,153,0.4)',
+            repeat: -1,
+            yoyo: true,
+            duration: 2,
+            ease: 'sine.inOut',
+            delay: 2,
+        });
+    }
 
     // Parallax on hero text as user scrolls down
     if (!prefersReducedMotion) {
@@ -260,7 +369,7 @@ function initSmoothNav() {
 
 function initAnimations() {
     initNavScroll();
-    initHeroAnimations();
+    initVideoIntro();
     initScrollReveals();
     initStaggerReveals();
     initSmoothNav();

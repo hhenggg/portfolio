@@ -39,14 +39,13 @@
 
 <!-- ─── Fixed Navigation ─────────────────────────────────────────── -->
 
-<nav class="nav-fixed fixed top-0 left-0 right-0 z-50 px-6 py-5 flex justify-between items-center transition-all duration-300" aria-label="Main navigation">
-    <a href="#hero" class="font-mono text-sm font-semibold text-emerald-400 no-underline tracking-wider">HH.</a>
-    <ul class="flex gap-1 sm:gap-2 list-none m-0 p-0">
-        <li><button class="nav-link font-mono text-sm text-slate-500 hover:text-slate-200 hover:bg-white/5 px-3 py-2 sm:px-4 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent active" data-section="hero">Home</button></li>
-        <li><button class="nav-link font-mono text-sm text-slate-500 hover:text-slate-200 hover:bg-white/5 px-3 py-2 sm:px-4 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent" data-section="about">About</button></li>
-        <li><button class="nav-link font-mono text-sm text-slate-500 hover:text-slate-200 hover:bg-white/5 px-3 py-2 sm:px-4 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent" data-section="skills">Skills</button></li>
-        <li><button class="nav-link font-mono text-sm text-slate-500 hover:text-slate-200 hover:bg-white/5 px-3 py-2 sm:px-4 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent" data-section="projects">Projects</button></li>
-        <li><button class="nav-link font-mono text-sm text-slate-500 hover:text-slate-200 hover:bg-white/5 px-3 py-2 sm:px-4 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent" data-section="education">Education</button></li>
+<nav class="nav-fixed fixed top-0 left-0 right-0 z-50 px-6 py-5 flex flex-col items-center justify-center transition-all duration-300" aria-label="Main navigation">
+    <ul class="flex gap-2 sm:gap-4 list-none m-0 p-0">
+        <li><button class="nav-link font-mono text-lg text-white hover:text-emerald-400 hover:bg-white/5 px-5 py-3 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent active" data-section="hero">Home</button></li>
+        <li><button class="nav-link font-mono text-lg text-white hover:text-emerald-400 hover:bg-white/5 px-5 py-3 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent" data-section="about">About</button></li>
+        <li><button class="nav-link font-mono text-lg text-white hover:text-emerald-400 hover:bg-white/5 px-5 py-3 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent" data-section="skills">Skills</button></li>
+        <li><button class="nav-link font-mono text-lg text-white hover:text-emerald-400 hover:bg-white/5 px-5 py-3 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent" data-section="projects">Projects</button></li>
+        <li><button class="nav-link font-mono text-lg text-white hover:text-emerald-400 hover:bg-white/5 px-5 py-3 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent" data-section="education">Education</button></li>
     </ul>
 </nav>
 
@@ -54,31 +53,44 @@
 
     <!-- ─── Hero ─────────────────────────────────────────────────── -->
 
-    <section id="hero" class="min-h-dvh w-full flex items-center justify-center relative px-6 md:px-12 lg:px-16 py-20">
-        <div class="w-full max-w-5xl mx-auto hero-content">
-            <p class="font-mono text-base text-emerald-400 tracking-widest uppercase mb-5 flex items-center gap-3">
+    <section id="hero" class="min-h-dvh w-full flex items-center justify-center relative px-6 md:px-12 lg:px-16 py-20 bg-[#050a14] overflow-hidden">
+        <!-- Background video -->
+        <video id="hero-video" autoplay muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-100 pointer-events-none">
+            <source src="videos/background.mp4" type="video/mp4">
+        </video>
+        <!-- Black fade overlay — animated in when video ends -->
+        <div id="hero-black-overlay" class="absolute inset-0 bg-[#050a14] pointer-events-none" style="opacity:0;z-index:1"></div>
+
+        <div class="relative w-full max-w-5xl mx-auto hero-content" style="z-index:2">
+            <p class="hero-greeting font-mono text-base text-emerald-400 tracking-widest uppercase mb-5 flex items-center gap-3" style="opacity:0">
                 <span class="block w-8 h-px bg-emerald-400"></span>
                 Hi, my name is
             </p>
-            <h1 class="font-sans text-[clamp(40px,8vw,80px)] font-bold text-slate-100 leading-[1.05] tracking-tight mb-4">
-                <span class="line block">Chhim</span>
-                <span class="line block"><span class="gradient-text">Heng Heng</span>.</span>
-            </h1>
-            <p class="text-[clamp(18px,2.5vw,24px)] font-light text-slate-400 max-w-xl leading-relaxed mb-10">
-                Computer Science student who builds full-stack applications and explores the edge of AI/ML — turning ideas into software that works.
+            <!-- Corner-bracket name reveal -->
+            <div class="name-bracket-wrap relative block w-full mb-4">
+                <div class="bracket-corner bracket-tl absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-emerald-400" style="opacity:0"></div>
+                <div class="bracket-corner bracket-tr absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-emerald-400" style="opacity:0"></div>
+                <div class="bracket-corner bracket-bl absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-emerald-400" style="opacity:0"></div>
+                <div class="bracket-corner bracket-br absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-emerald-400" style="opacity:0"></div>
+                <h1 class="hero-name font-sans text-[clamp(40px,10vw,100px)] font-bold leading-[1.05] tracking-tight px-8 py-2 whitespace-nowrap text-center">
+                    <span class="line" style="opacity:0"> <span class="gradient-text">Heng </span> <span class="bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent font-bold">Heng</span><span class="text-white"> Chhim</span></span>
+                </h1>
+            </div>
+            <p class="hero-subtitle text-[clamp(16px,2vw,22px)] font-light text-white w-full text-center leading-relaxed mb-10" style="opacity:0">
+                Junior Computer Science student who builds full-stack applications and explores the edge of AI/ML turning ideas into software that works.
             </p>
-            <div class="flex flex-wrap gap-3">
-                <a href="mailto:henghengc07@gmail.com" class="hero-link inline-flex items-center gap-2 font-mono text-base text-slate-400 no-underline px-5 py-3 border border-slate-700/40 rounded-lg hover:text-slate-200 hover:border-emerald-500/30 hover:bg-emerald-500/5 hover:-translate-y-0.5 transition-all duration-200">
+            <div class="flex flex-wrap gap-3 justify-center">
+                <a href="mailto:henghengc07@gmail.com" class="hero-link inline-flex items-center gap-2 font-mono text-base text-white no-underline px-5 py-3 border border-white/30 rounded-lg hover:border-emerald-400 hover:text-emerald-400 hover:bg-emerald-500/5 hover:-translate-y-0.5 transition-all duration-200" style="opacity:0">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                     Email
                 </a>
-                <a href="https://www.linkedin.com/in/heng-h-chhim-6528b2255/" target="_blank" rel="noopener noreferrer" class="hero-link inline-flex items-center gap-2 font-mono text-base text-slate-400 no-underline px-5 py-3 border border-slate-700/40 rounded-lg hover:text-slate-200 hover:border-emerald-500/30 hover:bg-emerald-500/5 hover:-translate-y-0.5 transition-all duration-200">
+                <a href="https://www.linkedin.com/in/heng-h-chhim-6528b2255/" target="_blank" rel="noopener noreferrer" class="hero-link inline-flex items-center gap-2 font-mono text-base text-white no-underline px-5 py-3 border border-white/30 rounded-lg hover:border-emerald-400 hover:text-emerald-400 hover:bg-emerald-500/5 hover:-translate-y-0.5 transition-all duration-200" style="opacity:0">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
                     LinkedIn
                 </a>
             </div>
         </div>
-        <div class="scroll-indicator absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-600" aria-hidden="true">
+        <div class="scroll-indicator absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-600" aria-hidden="true" style="z-index:2">
             <span class="font-mono text-[11px] tracking-widest">SCROLL</span>
             <div class="scroll-line w-px h-10 bg-gradient-to-b from-slate-600 to-transparent"></div>
         </div>
@@ -86,100 +98,103 @@
 
     <!-- ─── About ────────────────────────────────────────────────── -->
 
-    <section id="about" class="min-h-dvh w-full flex items-center justify-center px-6 md:px-12 lg:px-16 py-20">
-        <div class="w-full max-w-5xl mx-auto">
-            <p class="section-label font-mono text-sm font-medium text-emerald-400 tracking-[0.15em] uppercase mb-3 flex items-center gap-3 reveal">01 — About</p>
+    <section id="about" class="min-h-dvh w-full flex items-center justify-center px-6 md:px-12 lg:px-16 py-20 bg-[#060c18] relative overflow-hidden">
+        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none">
+            <source src="videos/background2.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-[#060c18]/60 pointer-events-none"></div>
+        <div class="relative w-full max-w-5xl mx-auto">
+            <p class="section-label font-mono text-sm font-medium text-cyan-400 tracking-[0.15em] uppercase mb-3 flex items-center gap-3 reveal">01 — About</p>
             <h2 class="font-sans text-[clamp(28px,5vw,44px)] font-bold text-slate-100 tracking-tight leading-tight mb-12 reveal">A bit about<br>who I am.</h2>
             <div class="text-[clamp(18px,2.2vw,22px)] font-light text-slate-300 leading-[1.8] max-w-2xl reveal">
                 <p class="mb-6">
-                    I'm a Computer Science student at <strong class="text-slate-100 font-medium">Paragon International University</strong> in Phnom Penh, focused on the intersection of <span class="text-emerald-400">Full-Stack Engineering</span> and <span class="text-emerald-400">Artificial Intelligence</span>.
+                    I'm a Computer Science student at <strong class="text-slate-100 font-medium">Paragon International University</strong> in Phnom Penh, focused on the intersection of <span class="text-cyan-400">Full-Stack Engineering</span> and <span class="text-cyan-400">Artificial Intelligence</span>.
                 </p>
                 <p class="mb-6">
                     I build data-driven applications with PHP and Laravel, deploy production environments with Nginx and PM2, and lately I've been diving into Flutter for cross-platform mobile development.
                 </p>
                 <p>
-                    My current focus is expanding into <span class="text-emerald-400">AI/ML integration</span> — building and deploying intelligent systems that solve real-world problems through scalable, well-architected software.
+                    My current focus is expanding into <span class="text-cyan-400">AI/ML integration</span> — building and deploying intelligent systems that solve real-world problems through scalable, well-architected software.
                 </p>
             </div>
         </div>
     </section>
 
-    <div class="w-full max-w-5xl mx-auto h-px bg-gradient-to-r from-transparent via-slate-800/50 to-transparent"></div>
+    <!--─── Skills ───────────────────────────────────────────────── -->
 
-    <!-- ─── Skills ───────────────────────────────────────────────── -->
-
-    <section id="skills" class="min-h-dvh w-full flex items-center justify-center px-6 md:px-12 lg:px-16 py-20">
+    <section id="skills" class="min-h-dvh w-full flex items-center justify-center px-6 md:px-12 lg:px-16 py-20 bg-[#0a0b12]">
         <div class="w-full max-w-5xl mx-auto">
-            <p class="section-label font-mono text-sm font-medium text-emerald-400 tracking-[0.15em] uppercase mb-3 flex items-center gap-3 reveal">02 — Skills</p>
-            <h2 class="font-sans text-[clamp(28px,5vw,44px)] font-bold text-slate-100 tracking-tight leading-tight mb-12 reveal">Technologies I<br>work with.</h2>
+            <p class="section-label font-mono text-sm font-medium text-amber-400 tracking-[0.15em] uppercase mb-3 flex items-center gap-3 reveal">02 — Skills</p>
+            <h2 class="font-sans text-[clamp(30px,10vw,50px)] font-bold text-slate-100 tracking-tight leading-tight mb-12 reveal whitespace-nowrap">Technologies I work with.</h2>
             <div class="skills-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5">
 
-                <div class="skill-card p-7 rounded-2xl bg-slate-900/40 border border-slate-800/50 hover:border-emerald-500/15 hover:-translate-y-0.5 transition-all duration-300">
-                    <h3 class="skill-card-title font-mono text-base font-semibold text-amber-300 mb-4 flex items-center gap-2">Programming Languages</h3>
+                <div class="skill-card p-7 rounded-2xl bg-slate-900/40 border border-slate-800/50 hover:border-orange-500 hover:-translate-y-0.5 transition-all duration-300">
+                    <h3 class="skill-card-title font-mono text-base font-semibold text-orange-400 mb-4 flex items-center justify-center gap-2">Programming Languages</h3>
                     <div class="flex flex-wrap gap-2">
-                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">C++</span>
-                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Java</span>
-                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">PHP</span>
-                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">JavaScript</span>
-                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Dart</span>
+                        <span data-tooltip="Systems & competitive programming" class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-orange-400 hover:border-orange-500 transition-colors duration-200">C++</span>
+                        <span data-tooltip="Object-oriented, cross-platform" class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-orange-400 hover:border-orange-500 transition-colors duration-200">Java</span>
+                        <span data-tooltip="Server-side scripting language" class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-orange-400 hover:border-orange-500 transition-colors duration-200">PHP</span>
+                        <span data-tooltip="Web interactivity & logic" class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-orange-400 hover:border-orange-500 transition-colors duration-200">JavaScript</span>
+                        <span data-tooltip="Language powering Flutter apps" class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-orange-400 hover:border-orange-500 transition-colors duration-200">Dart</span>
                     </div>
                 </div>
 
-                <div class="skill-card p-7 rounded-2xl bg-slate-900/40 border border-slate-800/50 hover:border-emerald-500/15 hover:-translate-y-0.5 transition-all duration-300">
-                    <h3 class="skill-card-title font-mono text-base font-semibold text-amber-300 mb-4 flex items-center gap-2">Web Development</h3>
+                <div class="skill-card p-7 rounded-2xl bg-slate-900/40 border border-slate-800/50 hover:border-blue-500 hover:-translate-y-0.5 transition-all duration-300">
+                    <h3 class="skill-card-title font-mono text-base font-semibold text-blue-400 mb-4 flex items-center justify-center gap-2">Web Development</h3>
                     <div class="flex flex-wrap gap-2">
-                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Laravel</span>
-                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Nuxt.js</span>
-                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Tailwind CSS</span>
-                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">HTML/CSS</span>
-                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Bootstrap 5</span>
+                        <span data-tooltip="PHP MVC web framework" class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-blue-400 hover:border-blue-500 transition-colors duration-200">Laravel</span>
+                        <span data-tooltip="Vue-based SSR/SSG framework" class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-blue-400 hover:border-blue-500 transition-colors duration-200">Nuxt.js</span>
+                        <span data-tooltip="Utility-first CSS framework" class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-blue-400 hover:border-blue-500 transition-colors duration-200">Tailwind CSS</span>
+                        <span data-tooltip="Web structure & styling" class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-blue-400 hover:border-blue-500 transition-colors duration-200">HTML/CSS</span>
+                        <span data-tooltip="CSS component library" class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-blue-400 hover:border-blue-500 transition-colors duration-200">Bootstrap 5</span>
                     </div>
                 </div>
 
-                <div class="skill-card p-7 rounded-2xl bg-slate-900/40 border border-slate-800/50 hover:border-emerald-500/15 hover:-translate-y-0.5 transition-all duration-300">
-                    <h3 class="skill-card-title font-mono text-base font-semibold text-amber-300 mb-4 flex items-center gap-2">Mobile Development</h3>
+                <div class="skill-card p-7 rounded-2xl bg-slate-900/40 border border-slate-800/50 hover:border-cyan-500 hover:-translate-y-0.5 transition-all duration-300">
+                    <h3 class="skill-card-title font-mono text-base font-semibold text-cyan-400 mb-4 flex items-center justify-center gap-2">Mobile Development</h3>
                     <div class="flex flex-wrap gap-2">
-                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Flutter</span>
-                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Dart</span>
+                        <span data-tooltip="Cross-platform mobile UI toolkit" class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-cyan-400 hover:border-cyan-500 transition-colors duration-200">Flutter</span>
+                        <span data-tooltip="Language powering Flutter apps" class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-cyan-400 hover:border-cyan-500 transition-colors duration-200">Dart</span>
                     </div>
                 </div>
 
-                <div class="skill-card p-7 rounded-2xl bg-slate-900/40 border border-slate-800/50 hover:border-emerald-500/15 hover:-translate-y-0.5 transition-all duration-300">
-                    <h3 class="skill-card-title font-mono text-base font-semibold text-amber-300 mb-4 flex items-center gap-2">Backend & Runtime</h3>
+                <div class="skill-card p-7 rounded-2xl bg-slate-900/40 border border-slate-800/50 hover:border-green-500 hover:-translate-y-0.5 transition-all duration-300">
+                    <h3 class="skill-card-title font-mono text-base font-semibold text-green-400 mb-4 flex items-center justify-center gap-2">Backend & Runtime</h3>
                     <div class="flex flex-wrap gap-2">
-                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Node.js</span>
-                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Express.js</span>
-                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">REST API</span>
+                        <span data-tooltip="JavaScript runtime for the server" class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-green-400 hover:border-green-500 transition-colors duration-200">Node.js</span>
+                        <span data-tooltip="Minimal Node.js web framework" class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-green-400 hover:border-green-500 transition-colors duration-200">Express.js</span>
+                        <span data-tooltip="HTTP-based API architecture" class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-green-400 hover:border-green-500 transition-colors duration-200">REST API</span>
                     </div>
                 </div>
 
-                <div class="skill-card p-7 rounded-2xl bg-slate-900/40 border border-slate-800/50 hover:border-emerald-500/15 hover:-translate-y-0.5 transition-all duration-300">
-                    <h3 class="skill-card-title font-mono text-base font-semibold text-amber-300 mb-4 flex items-center gap-2">Cloud & DevOps</h3>
+                <div class="skill-card p-7 rounded-2xl bg-slate-900/40 border border-slate-800/50 hover:border-purple-500 hover:-translate-y-0.5 transition-all duration-300">
+                    <h3 class="skill-card-title font-mono text-base font-semibold text-purple-400 mb-4 flex items-center justify-center gap-2">Cloud & DevOps</h3>
                     <div class="flex flex-wrap gap-2">
-                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Digital Ocean</span>
-                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Nginx</span>
-                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">PM2</span>
-                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Linux</span>
-                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">SSH</span>
+                        <span data-tooltip="Cloud VPS hosting provider" class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-purple-400 hover:border-purple-500 transition-colors duration-200">Digital Ocean</span>
+                        <span data-tooltip="Web server & reverse proxy" class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-purple-400 hover:border-purple-500 transition-colors duration-200">Nginx</span>
+                        <span data-tooltip="Node.js process manager" class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-purple-400 hover:border-purple-500 transition-colors duration-200">PM2</span>
+                        <span data-tooltip="Server operating system" class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-purple-400 hover:border-purple-500 transition-colors duration-200">Linux</span>
+                        <span data-tooltip="Secure remote server access" class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-purple-400 hover:border-purple-500 transition-colors duration-200">SSH</span>
                     </div>
                 </div>
 
-                <div class="skill-card p-7 rounded-2xl bg-slate-900/40 border border-slate-800/50 hover:border-emerald-500/15 hover:-translate-y-0.5 transition-all duration-300">
-                    <h3 class="skill-card-title font-mono text-base font-semibold text-amber-300 mb-4 flex items-center gap-2">Tools</h3>
+                <div class="skill-card p-7 rounded-2xl bg-slate-900/40 border border-slate-800/50 hover:border-slate-400 hover:-translate-y-0.5 transition-all duration-300">
+                    <h3 class="skill-card-title font-mono text-base font-semibold text-slate-300 mb-4 flex items-center justify-center gap-2">Tools</h3>
                     <div class="flex flex-wrap gap-2">
-                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Git/GitHub</span>
-                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">VS Code</span>
-                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">PhpStorm</span>
-                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">IntelliJ</span>
-                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">Insomnia</span>
+                        <span data-tooltip="Version control & collaboration" class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-slate-300 hover:border-slate-400 transition-colors duration-200">Git/GitHub</span>
+                        <span data-tooltip="Lightweight code editor" class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-slate-300 hover:border-slate-400 transition-colors duration-200">VS Code</span>
+                        <span data-tooltip="IDE built for PHP & Laravel" class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-slate-300 hover:border-slate-400 transition-colors duration-200">PhpStorm</span>
+                        <span data-tooltip="IDE for JVM languages" class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-slate-300 hover:border-slate-400 transition-colors duration-200">IntelliJ</span>
+                        <span data-tooltip="API design & testing client" class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-slate-300 hover:border-slate-400 transition-colors duration-200">Insomnia</span>
+                        <span data-tooltip="API design & testing client" class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-slate-300 hover:border-slate-400 transition-colors duration-200">Postman</span>
                     </div>
                 </div>
 
-                <div class="skill-card p-7 rounded-2xl bg-slate-900/40 border border-slate-800/50 hover:border-emerald-500/15 hover:-translate-y-0.5 transition-all duration-300">
-                    <h3 class="skill-card-title font-mono text-base font-semibold text-amber-300 mb-4 flex items-center gap-2">Database</h3>
+                <div class="skill-card p-7 rounded-2xl bg-slate-900/40 border border-slate-800/50 hover:border-yellow-500 hover:-translate-y-0.5 transition-all duration-300">
+                    <h3 class="skill-card-title font-mono text-base font-semibold text-yellow-400 mb-4 flex items-center justify-center gap-2">Database</h3>
                     <div class="flex flex-wrap gap-2">
-                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">MySQL</span>
-                        <span class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-emerald-400 hover:border-emerald-500/20 transition-colors duration-200">PostgreSQL</span>
+                        <span data-tooltip="Popular relational database" class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-yellow-400 hover:border-yellow-500 transition-colors duration-200">MySQL</span>
+                        <span data-tooltip="Advanced open-source SQL database" class="font-mono text-sm px-3.5 py-1.5 rounded-md text-slate-400 bg-slate-800/40 border border-slate-700/30 hover:text-yellow-400 hover:border-yellow-500 transition-colors duration-200">PostgreSQL</span>
                     </div>
                 </div>
 
@@ -187,91 +202,89 @@
         </div>
     </section>
 
-    <div class="w-full max-w-5xl mx-auto h-px bg-gradient-to-r from-transparent via-slate-800/50 to-transparent"></div>
+    <!--─── Projects ─────────────────────────────────────────────── -->
 
-    <!-- ─── Projects ─────────────────────────────────────────────── -->
-
-    <section id="projects" class="min-h-dvh w-full flex items-center justify-center px-6 md:px-12 lg:px-16 py-20">
+    <section id="projects" class="min-h-dvh w-full flex items-center justify-center px-6 md:px-12 lg:px-16 py-10 bg-[#080713]">
         <div class="w-full max-w-5xl mx-auto">
-            <p class="section-label font-mono text-sm font-medium text-emerald-400 tracking-[0.15em] uppercase mb-3 flex items-center gap-3 reveal">03 — Projects</p>
-            <h2 class="font-sans text-[clamp(28px,5vw,44px)] font-bold text-slate-100 tracking-tight leading-tight mb-12 reveal">Things I've<br>built.</h2>
+            <p class="section-label font-mono text-sm font-medium text-violet-400 tracking-[0.15em] uppercase mb-2 flex items-center gap-3 reveal">03 — Projects</p>
+            <h2 class="font-sans text-[clamp(24px,4vw,36px)] font-bold text-slate-100 tracking-tight leading-tight mb-6 reveal">Things I've built.</h2>
 
-            <!-- Project 01 -->
-            <div class="project-card p-8 sm:p-9 rounded-2xl bg-slate-900/30 border border-slate-800/40 hover:border-emerald-500/10 hover:-translate-y-0.5 transition-all duration-300 mb-6">
-                <p class="font-mono text-sm text-slate-600 mb-4">01</p>
-                <h3 class="font-sans text-xl sm:text-2xl font-semibold text-slate-100 mb-1.5 leading-snug">Peer to Peer Lending Marketplace Platform</h3>
-                <p class="font-mono text-base text-emerald-400 mb-1">Backend Developer</p>
-                <p class="text-base text-slate-500 mb-5">Team Project — Paragon International University</p>
-                <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="tech-tag font-mono text-xs font-medium px-3.5 py-1.5 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">Laravel</span>
-                    <span class="tech-tag font-mono text-xs font-medium px-3.5 py-1.5 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">Nuxt.js</span>
-                    <span class="tech-tag font-mono text-xs font-medium px-3.5 py-1.5 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">MySQL</span>
-                    <span class="tech-tag font-mono text-xs font-medium px-3.5 py-1.5 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">Tailwind CSS</span>
-                    <span class="tech-tag font-mono text-xs font-medium px-3.5 py-1.5 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">GitHub</span>
+            <div class="grid md:grid-cols-2 gap-4">
+                <!-- Project 01 -->
+                <div class="project-card p-5 sm:p-6 rounded-2xl bg-slate-900/30 border border-slate-800/40 hover:border-violet-500/10 hover:-translate-y-0.5 transition-all duration-300">
+                    <p class="font-mono text-xs text-slate-600 mb-2">01</p>
+                    <h3 class="font-sans text-lg font-semibold text-slate-100 mb-1 leading-snug">Peer to Peer Lending Marketplace Platform</h3>
+                    <p class="font-mono text-sm text-violet-400 mb-0.5">Full Stack Developer</p>
+                    <p class="text-sm text-slate-500 mb-3">Team Project — Paragon International University</p>
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                        <span class="tech-tag font-mono text-[11px] font-medium px-2.5 py-1 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">Laravel</span>
+                        <span class="tech-tag font-mono text-[11px] font-medium px-2.5 py-1 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">Nuxt.js</span>
+                        <span class="tech-tag font-mono text-[11px] font-medium px-2.5 py-1 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">MySQL</span>
+                        <span class="tech-tag font-mono text-[11px] font-medium px-2.5 py-1 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">Tailwind CSS</span>
+                        <span class="tech-tag font-mono text-[11px] font-medium px-2.5 py-1 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">GitHub</span>
+                    </div>
+                    <ul class="list-none m-0 p-0">
+                        <li class="project-bullet flex items-start gap-2.5 py-1.5 border-b border-slate-800/30 text-sm text-slate-400 leading-relaxed"><span class="text-violet-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Developed backend and admin dashboard using Laravel and Nuxt.js</span></li>
+                        <li class="project-bullet flex items-start gap-2.5 py-1.5 border-b border-slate-800/30 text-sm text-slate-400 leading-relaxed"><span class="text-violet-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Implemented user management: approving, rejecting, and managing accounts</span></li>
+                        <li class="project-bullet flex items-start gap-2.5 py-1.5 border-b border-slate-800/30 text-sm text-slate-400 leading-relaxed"><span class="text-violet-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Built loan request management with approval/rejection workflows</span></li>
+                        <li class="project-bullet flex items-start gap-2.5 py-1.5 border-b border-slate-800/30 text-sm text-slate-400 leading-relaxed"><span class="text-violet-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Designed data visualization dashboards with charts and statistics</span></li>
+                        <li class="project-bullet flex items-start gap-2.5 py-1.5 border-b border-slate-800/30 text-sm text-slate-400 leading-relaxed"><span class="text-violet-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Utilized RESTful APIs for backend-frontend data flow</span></li>
+                        <li class="project-bullet flex items-start gap-2.5 py-1.5 text-sm text-slate-400 leading-relaxed"><span class="text-violet-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Collaborated with frontend developers for system reliability</span></li>
+                    </ul>
                 </div>
-                <ul class="list-none m-0 p-0">
-                    <li class="project-bullet flex items-start gap-3.5 py-2.5 border-b border-slate-800/30 text-base text-slate-400 leading-relaxed"><span class="text-emerald-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Developed the backend and admin dashboard for a peer-to-peer lending marketplace using Laravel and Nuxt.js</span></li>
-                    <li class="project-bullet flex items-start gap-3.5 py-2.5 border-b border-slate-800/30 text-base text-slate-400 leading-relaxed"><span class="text-emerald-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Implemented user management workflows: approving, rejecting, and managing borrower and lender accounts</span></li>
-                    <li class="project-bullet flex items-start gap-3.5 py-2.5 border-b border-slate-800/30 text-base text-slate-400 leading-relaxed"><span class="text-emerald-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Built loan request management systems with full approval/rejection processes and real-time status updates</span></li>
-                    <li class="project-bullet flex items-start gap-3.5 py-2.5 border-b border-slate-800/30 text-base text-slate-400 leading-relaxed"><span class="text-emerald-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Designed data visualization dashboards using charts and key statistics to monitor platform activity</span></li>
-                    <li class="project-bullet flex items-start gap-3.5 py-2.5 border-b border-slate-800/30 text-base text-slate-400 leading-relaxed"><span class="text-emerald-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Utilized RESTful APIs to handle data flow between the backend and frontend</span></li>
-                    <li class="project-bullet flex items-start gap-3.5 py-2.5 text-base text-slate-400 leading-relaxed"><span class="text-emerald-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Collaborated closely with frontend developers to ensure system reliability and functionality</span></li>
-                </ul>
-            </div>
 
-            <!-- Project 02 -->
-            <div class="project-card p-8 sm:p-9 rounded-2xl bg-slate-900/30 border border-slate-800/40 hover:border-emerald-500/10 hover:-translate-y-0.5 transition-all duration-300">
-                <p class="font-mono text-sm text-slate-600 mb-4">02</p>
-                <h3 class="font-sans text-xl sm:text-2xl font-semibold text-slate-100 mb-1.5 leading-snug">Product Management Mobile App</h3>
-                <p class="font-mono text-base text-emerald-400 mb-1">Full-Stack Developer</p>
-                <p class="text-base text-slate-500 mb-5">Team Project — Paragon International University</p>
-                <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="tech-tag font-mono text-xs font-medium px-3.5 py-1.5 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">Flutter</span>
-                    <span class="tech-tag font-mono text-xs font-medium px-3.5 py-1.5 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">Dart</span>
-                    <span class="tech-tag font-mono text-xs font-medium px-3.5 py-1.5 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">Node.js</span>
-                    <span class="tech-tag font-mono text-xs font-medium px-3.5 py-1.5 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">Express.js</span>
-                    <span class="tech-tag font-mono text-xs font-medium px-3.5 py-1.5 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">PostgreSQL</span>
-                    <span class="tech-tag font-mono text-xs font-medium px-3.5 py-1.5 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">REST API</span>
+                <!-- Project 02 -->
+                <div class="project-card p-5 sm:p-6 rounded-2xl bg-slate-900/30 border border-slate-800/40 hover:border-violet-500/10 hover:-translate-y-0.5 transition-all duration-300">
+                    <p class="font-mono text-xs text-slate-600 mb-2">02</p>
+                    <h3 class="font-sans text-lg font-semibold text-slate-100 mb-1 leading-snug">Product Management Mobile App</h3>
+                    <p class="font-mono text-sm text-violet-400 mb-0.5">Full-Stack Developer</p>
+                    <p class="text-sm text-slate-500 mb-3">Team Project — Paragon International University</p>
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                        <span class="tech-tag font-mono text-[11px] font-medium px-2.5 py-1 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">Flutter</span>
+                        <span class="tech-tag font-mono text-[11px] font-medium px-2.5 py-1 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">Dart</span>
+                        <span class="tech-tag font-mono text-[11px] font-medium px-2.5 py-1 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">Node.js</span>
+                        <span class="tech-tag font-mono text-[11px] font-medium px-2.5 py-1 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">Express.js</span>
+                        <span class="tech-tag font-mono text-[11px] font-medium px-2.5 py-1 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">PostgreSQL</span>
+                        <span class="tech-tag font-mono text-[11px] font-medium px-2.5 py-1 rounded-full text-sky-300 bg-sky-500/8 border border-sky-500/10">REST API</span>
+                    </div>
+                    <ul class="list-none m-0 p-0">
+                        <li class="project-bullet flex items-start gap-2.5 py-1.5 border-b border-slate-800/30 text-sm text-slate-400 leading-relaxed"><span class="text-violet-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Built cross-platform mobile app with Flutter and Node.js/Express REST API</span></li>
+                        <li class="project-bullet flex items-start gap-2.5 py-1.5 border-b border-slate-800/30 text-sm text-slate-400 leading-relaxed"><span class="text-violet-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Implemented 5 RESTful endpoints with PostgreSQL and connection pooling</span></li>
+                        <li class="project-bullet flex items-start gap-2.5 py-1.5 border-b border-slate-800/30 text-sm text-slate-400 leading-relaxed"><span class="text-violet-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Developed category filtering with bottom sheet UI and detail views</span></li>
+                        <li class="project-bullet flex items-start gap-2.5 py-1.5 border-b border-slate-800/30 text-sm text-slate-400 leading-relaxed"><span class="text-violet-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Implemented auth flow with form validation and singleton AuthService</span></li>
+                        <li class="project-bullet flex items-start gap-2.5 py-1.5 border-b border-slate-800/30 text-sm text-slate-400 leading-relaxed"><span class="text-violet-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Created dashboard with real-time product statistics and inventory value</span></li>
+                        <li class="project-bullet flex items-start gap-2.5 py-1.5 text-sm text-slate-400 leading-relaxed"><span class="text-violet-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Built tab navigation, loading states, error handling, and smooth animations</span></li>
+                    </ul>
                 </div>
-                <ul class="list-none m-0 p-0">
-                    <li class="project-bullet flex items-start gap-3.5 py-2.5 border-b border-slate-800/30 text-base text-slate-400 leading-relaxed"><span class="text-emerald-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Built a cross-platform mobile app with Flutter featuring full product CRUD operations connected to a Node.js/Express REST API</span></li>
-                    <li class="project-bullet flex items-start gap-3.5 py-2.5 border-b border-slate-800/30 text-base text-slate-400 leading-relaxed"><span class="text-emerald-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Designed and implemented 5 RESTful endpoints with parameterized PostgreSQL queries and connection pooling</span></li>
-                    <li class="project-bullet flex items-start gap-3.5 py-2.5 border-b border-slate-800/30 text-base text-slate-400 leading-relaxed"><span class="text-emerald-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Developed category-based product filtering with a bottom sheet UI and product detail views with edit/delete actions</span></li>
-                    <li class="project-bullet flex items-start gap-3.5 py-2.5 border-b border-slate-800/30 text-base text-slate-400 leading-relaxed"><span class="text-emerald-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Implemented user authentication flow with form validation and auth state management via a singleton AuthService</span></li>
-                    <li class="project-bullet flex items-start gap-3.5 py-2.5 border-b border-slate-800/30 text-base text-slate-400 leading-relaxed"><span class="text-emerald-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Created a dashboard with real-time product statistics including category counts and total inventory value</span></li>
-                    <li class="project-bullet flex items-start gap-3.5 py-2.5 text-base text-slate-400 leading-relaxed"><span class="text-emerald-400 font-mono font-semibold shrink-0 mt-0.5">—</span><span>Built three-tab bottom navigation, loading states, error handling, remote image loading with fallbacks, and smooth animations</span></li>
-                </ul>
             </div>
 
         </div>
     </section>
 
-    <div class="w-full max-w-5xl mx-auto h-px bg-gradient-to-r from-transparent via-slate-800/50 to-transparent"></div>
+    <!--─── Education ────────────────────────────────────────────── -->
 
-    <!-- ─── Education ────────────────────────────────────────────── -->
-
-    <section id="education" class="min-h-dvh w-full flex items-center justify-center px-6 md:px-12 lg:px-16 py-20">
+    <section id="education" class="min-h-dvh w-full flex items-center justify-center px-6 md:px-12 lg:px-16 py-20 bg-[#0a0610]">
         <div class="w-full max-w-5xl mx-auto">
-            <p class="section-label font-mono text-sm font-medium text-emerald-400 tracking-[0.15em] uppercase mb-3 flex items-center gap-3 reveal">04 — Education</p>
+            <p class="section-label font-mono text-sm font-medium text-rose-400 tracking-[0.15em] uppercase mb-3 flex items-center gap-3 reveal">04 — Education</p>
             <h2 class="font-sans text-[clamp(28px,5vw,44px)] font-bold text-slate-100 tracking-tight leading-tight mb-12 reveal">Where I've<br>studied.</h2>
             <div class="flex flex-col">
                 <div class="edu-item flex gap-6 py-8 border-b border-slate-800/40 items-start">
-                    <div class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.3)] shrink-0 mt-1.5" aria-hidden="true"></div>
+                    <div class="w-2.5 h-2.5 rounded-full bg-rose-400 shadow-[0_0_10px_rgba(251,113,133,0.3)] shrink-0 mt-1.5" aria-hidden="true"></div>
                     <div>
                         <h3 class="font-sans text-xl font-semibold text-slate-100 mb-1">Bachelor of Science in Computer Science</h3>
                         <p class="text-base text-slate-400 mb-1">Paragon International University — Phnom Penh</p>
-                        <p class="font-mono text-sm text-emerald-400 font-medium">Expected Graduation: 2028</p>
+                        <p class="font-mono text-sm text-rose-400 font-medium">Expected Graduation: 2028</p>
                     </div>
                 </div>
                 <div class="edu-item flex gap-6 py-8 border-b border-slate-800/40 items-start">
-                    <div class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.3)] shrink-0 mt-1.5" aria-hidden="true"></div>
+                    <div class="w-2.5 h-2.5 rounded-full bg-rose-400 shadow-[0_0_10px_rgba(251,113,133,0.3)] shrink-0 mt-1.5" aria-hidden="true"></div>
                     <div>
                         <h3 class="font-sans text-xl font-semibold text-slate-100 mb-1">General English Program (GEP 12)</h3>
                         <p class="text-base text-slate-400">Australian Centre for Education (ACE) — Phnom Penh</p>
                     </div>
                 </div>
                 <div class="edu-item flex gap-6 py-8 items-start">
-                    <div class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.3)] shrink-0 mt-1.5" aria-hidden="true"></div>
+                    <div class="w-2.5 h-2.5 rounded-full bg-rose-400 shadow-[0_0_10px_rgba(251,113,133,0.3)] shrink-0 mt-1.5" aria-hidden="true"></div>
                     <div>
                         <h3 class="font-sans text-xl font-semibold text-slate-100 mb-1">High School Baccalaureate (Science)</h3>
                         <p class="text-base text-slate-400">Preah Sisowath High School — Phnom Penh</p>
@@ -281,22 +294,20 @@
         </div>
     </section>
 
-    <div class="w-full max-w-5xl mx-auto h-px bg-gradient-to-r from-transparent via-slate-800/50 to-transparent"></div>
+    <!--─── Contact / Footer ─────────────────────────────────────── -->
 
-    <!-- ─── Contact / Footer ─────────────────────────────────────── -->
-
-    <section id="contact" class="min-h-[50dvh] w-full flex items-center justify-center px-6 md:px-12 lg:px-16 py-20">
+    <section id="contact" class="min-h-[50dvh] w-full flex items-center justify-center px-6 md:px-12 lg:px-16 py-20 bg-[#0c0a08]">
         <div class="w-full max-w-5xl mx-auto">
-            <p class="section-label font-mono text-sm font-medium text-emerald-400 tracking-[0.15em] uppercase mb-3 flex items-center gap-3 reveal">05 — Contact</p>
+            <p class="section-label font-mono text-sm font-medium text-orange-400 tracking-[0.15em] uppercase mb-3 flex items-center gap-3 reveal">05 — Contact</p>
             <h2 class="font-sans text-[clamp(28px,5vw,48px)] font-bold text-slate-100 tracking-tight leading-tight mb-8 reveal">
                 Let's build<br><span class="text-slate-600">something together.</span>
             </h2>
             <div class="flex flex-wrap gap-4 mb-16 reveal">
-                <a href="mailto:henghengc07@gmail.com" class="inline-flex items-center gap-2 font-mono text-base text-emerald-400 no-underline px-6 py-3 border border-emerald-500/20 rounded-lg hover:bg-emerald-500/8 hover:border-emerald-500/40 hover:-translate-y-0.5 transition-all duration-200">
+                <a href="mailto:henghengc07@gmail.com" class="inline-flex items-center gap-2 font-mono text-base text-orange-400 no-underline px-6 py-3 border border-orange-500/20 rounded-lg hover:bg-orange-500/8 hover:border-orange-500/40 hover:-translate-y-0.5 transition-all duration-200">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                     henghengc07@gmail.com
                 </a>
-                <a href="https://www.linkedin.com/in/heng-h-chhim-6528b2255/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-mono text-base text-emerald-400 no-underline px-6 py-3 border border-emerald-500/20 rounded-lg hover:bg-emerald-500/8 hover:border-emerald-500/40 hover:-translate-y-0.5 transition-all duration-200">
+                <a href="https://www.linkedin.com/in/heng-h-chhim-6528b2255/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-mono text-base text-orange-400 no-underline px-6 py-3 border border-orange-500/20 rounded-lg hover:bg-orange-500/8 hover:border-orange-500/40 hover:-translate-y-0.5 transition-all duration-200">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
                     LinkedIn
                 </a>

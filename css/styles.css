@@ -46,21 +46,41 @@ body {
     background-clip: text;
 }
 
-/* Section label line */
+/* Section label line — inherits the text color of the label */
 .section-label::after {
     content: '';
     display: block;
     flex: 1;
     max-width: 200px;
     height: 1px;
-    background: linear-gradient(to right, rgba(52, 211, 153, 0.3), transparent);
+    background: linear-gradient(to right, currentColor, transparent);
+    opacity: 0.3;
 }
 
-/* Skill card prefix */
-.skill-card-title::before {
-    content: '//';
-    color: #475569;
-    font-weight: 400;
+/* Skill tag tooltip */
+[data-tooltip] {
+    position: relative;
+}
+[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1e293b;
+    color: #cbd5e1;
+    font-size: 11px;
+    white-space: nowrap;
+    padding: 4px 8px;
+    border-radius: 5px;
+    border: 1px solid #334155;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    z-index: 50;
+}
+[data-tooltip]:hover::after {
+    opacity: 1;
 }
 
 /* Scroll indicator animation */
@@ -75,6 +95,15 @@ body {
 /* GSAP reveal states */
 .reveal { opacity: 0; transform: translateY(30px); }
 .reveal-left { opacity: 0; transform: translateX(-30px); }
+
+/* Corner brackets on hero name */
+.name-bracket-wrap {
+    display: inline-block;
+}
+.bracket-corner {
+    pointer-events: none;
+    transition: box-shadow 0.3s ease;
+}
 
 /* Focus */
 *:focus-visible {
@@ -92,4 +121,5 @@ body {
     }
     .reveal, .reveal-left { opacity: 1 !important; transform: none !important; }
     .scroll-line { animation: none; opacity: 0.5; }
+    .bracket-corner, .hero-greeting, .hero-name .line, .hero-subtitle, .hero-link { opacity: 1 !important; }
 }
