@@ -64,36 +64,34 @@ function initVideoIntro() {
     }
 
     let revealed = false;
+    let replayTimeoutId;
 
     function fadeToBlackThenReveal() {
         if (revealed) return;
         revealed = true;
+        clearTimeout(replayTimeoutId);
         gsap.to(blackOverlay, {
             opacity: 1,
             duration: 0.3,
             ease: 'power2.inOut',
             onComplete: () => {
+                video.pause();
                 initHeroAnimations();
-                // After 20s, fade out text → replay video → repeat
-                setTimeout(replayLoop, 20000);
+                replayTimeoutId = window.setTimeout(replayLoop, 18000);
             },
         });
     }
 
     function replayLoop() {
-        // Fade out hero content
-        const els = heroContent.querySelectorAll('.hero-greeting, .bracket-corner, .hero-name .line, .hero-subtitle, .hero-link');
+        const els = heroContent?.querySelectorAll('.hero-greeting, .bracket-corner, .hero-name .line, .hero-subtitle, .hero-link');
         const fadeOut = gsap.timeline({
             onComplete: () => {
-                // Also hide scroll indicator
                 gsap.set(scrollIndicator, { opacity: 0 });
-                // Fade out the black overlay to reveal the video
                 gsap.to(blackOverlay, {
                     opacity: 0,
                     duration: 0.5,
                     ease: 'power2.inOut',
                     onComplete: () => {
-                        // Reset and replay video
                         revealed = false;
                         video.currentTime = 0;
                         video.play();
@@ -101,6 +99,7 @@ function initVideoIntro() {
                 });
             },
         });
+
         fadeOut.to(els, {
             opacity: 0,
             y: -20,
