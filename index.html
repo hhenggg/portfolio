@@ -68,10 +68,19 @@
     <!-- ─── Hero ─────────────────────────────────────────────────── -->
 
     <section id="hero" class="min-h-dvh w-full flex items-center justify-center relative px-6 md:px-12 lg:px-16 py-20 bg-black overflow-hidden">
-        <!-- Background video -->
+        <!-- Background video — mobile gets 1080p, desktop gets 4K -->
         <video id="hero-video" autoplay muted playsinline webkit-playsinline preload="auto" class="absolute inset-0 w-full h-full object-cover opacity-100 pointer-events-none">
             <source src="videos/background.mp4" type="video/mp4">
         </video>
+        <script>
+            (function() {
+                var v = document.getElementById('hero-video');
+                if (v && window.innerWidth <= 768) {
+                    v.querySelector('source').src = 'videos/background_mobile.mp4';
+                    v.load();
+                }
+            })();
+        </script>
         <!-- Black fade overlay — animated in when video ends -->
         <div id="hero-black-overlay" class="absolute inset-0 bg-black pointer-events-none" style="opacity:0;z-index:1"></div>
 
