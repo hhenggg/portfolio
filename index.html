@@ -41,7 +41,7 @@
 
 <nav class="nav-fixed fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 py-3 sm:py-5 flex items-center justify-center transition-all duration-300" aria-label="Main navigation">
     <!-- Mobile hamburger -->
-    <button id="nav-toggle" class="md:hidden absolute right-4 top-3 p-2 text-white border-none bg-transparent cursor-pointer z-50" aria-label="Toggle menu" aria-expanded="false">
+    <button id="nav-toggle" class="md:hidden fixed right-4 top-3 p-2 text-white border-none bg-transparent cursor-pointer z-[200]" aria-label="Toggle menu" aria-expanded="false">
         <svg class="hamburger-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
         <svg class="close-icon w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
     </button>
@@ -54,7 +54,7 @@
         <li><button class="nav-link font-mono text-base lg:text-lg text-white hover:text-emerald-400 hover:bg-white/5 px-3 lg:px-5 py-2 lg:py-3 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent" data-section="education">Education</button></li>
     </ul>
     <!-- Mobile nav menu -->
-    <ul id="nav-mobile" class="md:hidden hidden fixed inset-0 bg-[#050a14]/95 backdrop-blur-lg flex-col items-center justify-center gap-2 list-none m-0 p-0 z-40">
+    <ul id="nav-mobile" class="md:hidden hidden fixed inset-0 bg-[#050a14]/95 backdrop-blur-lg flex-col items-center justify-center gap-2 list-none m-0 p-0 z-[100]">
         <li><button class="nav-link font-mono text-xl text-white hover:text-emerald-400 px-6 py-4 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent active" data-section="hero">Home</button></li>
         <li><button class="nav-link font-mono text-xl text-white hover:text-emerald-400 px-6 py-4 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent" data-section="about">About</button></li>
         <li><button class="nav-link font-mono text-xl text-white hover:text-emerald-400 px-6 py-4 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent" data-section="skills">Skills</button></li>
