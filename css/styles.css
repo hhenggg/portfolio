@@ -174,6 +174,12 @@ body {
     border-radius: 4px;
 }
 
+/* Mobile adjustments */
+@media (max-width: 640px) {
+    .bracket-corner { width: 14px; height: 14px; }
+    .section-label::after { max-width: 80px; }
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {

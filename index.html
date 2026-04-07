@@ -39,13 +39,27 @@
 
 <!-- ─── Fixed Navigation ─────────────────────────────────────────── -->
 
-<nav class="nav-fixed fixed top-0 left-0 right-0 z-50 px-6 py-5 flex flex-col items-center justify-center transition-all duration-300" aria-label="Main navigation">
-    <ul class="flex gap-2 sm:gap-4 list-none m-0 p-0">
-        <li><button class="nav-link font-mono text-lg text-white hover:text-emerald-400 hover:bg-white/5 px-5 py-3 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent active" data-section="hero">Home</button></li>
-        <li><button class="nav-link font-mono text-lg text-white hover:text-emerald-400 hover:bg-white/5 px-5 py-3 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent" data-section="about">About</button></li>
-        <li><button class="nav-link font-mono text-lg text-white hover:text-emerald-400 hover:bg-white/5 px-5 py-3 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent" data-section="skills">Skills</button></li>
-        <li><button class="nav-link font-mono text-lg text-white hover:text-emerald-400 hover:bg-white/5 px-5 py-3 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent" data-section="projects">Projects</button></li>
-        <li><button class="nav-link font-mono text-lg text-white hover:text-emerald-400 hover:bg-white/5 px-5 py-3 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent" data-section="education">Education</button></li>
+<nav class="nav-fixed fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 py-3 sm:py-5 flex items-center justify-center transition-all duration-300" aria-label="Main navigation">
+    <!-- Mobile hamburger -->
+    <button id="nav-toggle" class="md:hidden absolute right-4 top-3 p-2 text-white border-none bg-transparent cursor-pointer z-50" aria-label="Toggle menu" aria-expanded="false">
+        <svg class="hamburger-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg class="close-icon w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <!-- Desktop nav -->
+    <ul class="hidden md:flex gap-2 lg:gap-4 list-none m-0 p-0">
+        <li><button class="nav-link font-mono text-base lg:text-lg text-white hover:text-emerald-400 hover:bg-white/5 px-3 lg:px-5 py-2 lg:py-3 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent active" data-section="hero">Home</button></li>
+        <li><button class="nav-link font-mono text-base lg:text-lg text-white hover:text-emerald-400 hover:bg-white/5 px-3 lg:px-5 py-2 lg:py-3 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent" data-section="about">About</button></li>
+        <li><button class="nav-link font-mono text-base lg:text-lg text-white hover:text-emerald-400 hover:bg-white/5 px-3 lg:px-5 py-2 lg:py-3 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent" data-section="skills">Skills</button></li>
+        <li><button class="nav-link font-mono text-base lg:text-lg text-white hover:text-emerald-400 hover:bg-white/5 px-3 lg:px-5 py-2 lg:py-3 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent" data-section="projects">Projects</button></li>
+        <li><button class="nav-link font-mono text-base lg:text-lg text-white hover:text-emerald-400 hover:bg-white/5 px-3 lg:px-5 py-2 lg:py-3 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent" data-section="education">Education</button></li>
+    </ul>
+    <!-- Mobile nav menu -->
+    <ul id="nav-mobile" class="md:hidden hidden fixed inset-0 bg-[#050a14]/95 backdrop-blur-lg flex-col items-center justify-center gap-2 list-none m-0 p-0 z-40">
+        <li><button class="nav-link font-mono text-xl text-white hover:text-emerald-400 px-6 py-4 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent active" data-section="hero">Home</button></li>
+        <li><button class="nav-link font-mono text-xl text-white hover:text-emerald-400 px-6 py-4 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent" data-section="about">About</button></li>
+        <li><button class="nav-link font-mono text-xl text-white hover:text-emerald-400 px-6 py-4 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent" data-section="skills">Skills</button></li>
+        <li><button class="nav-link font-mono text-xl text-white hover:text-emerald-400 px-6 py-4 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent" data-section="projects">Projects</button></li>
+        <li><button class="nav-link font-mono text-xl text-white hover:text-emerald-400 px-6 py-4 rounded-md transition-all duration-200 cursor-pointer border-none bg-transparent" data-section="education">Education</button></li>
     </ul>
 </nav>
 
@@ -55,7 +69,7 @@
 
     <section id="hero" class="min-h-dvh w-full flex items-center justify-center relative px-6 md:px-12 lg:px-16 py-20 bg-black overflow-hidden">
         <!-- Background video -->
-        <video id="hero-video" autoplay muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-100 pointer-events-none">
+        <video id="hero-video" autoplay muted playsinline webkit-playsinline preload="auto" class="absolute inset-0 w-full h-full object-cover opacity-100 pointer-events-none">
             <source src="videos/background.mp4" type="video/mp4">
         </video>
         <!-- Black fade overlay — animated in when video ends -->
@@ -72,7 +86,7 @@
                 <div class="bracket-corner bracket-tr absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-emerald-400" style="opacity:0"></div>
                 <div class="bracket-corner bracket-bl absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-emerald-400" style="opacity:0"></div>
                 <div class="bracket-corner bracket-br absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-emerald-400" style="opacity:0"></div>
-                <h1 class="hero-name font-sans text-[clamp(40px,10vw,100px)] font-bold leading-[1.05] tracking-tight px-8 py-2 whitespace-nowrap text-center">
+                <h1 class="hero-name font-sans text-[clamp(32px,8vw,100px)] font-bold leading-[1.05] tracking-tight px-4 sm:px-8 py-2 text-center">
                     <span class="line" style="opacity:0"> <span class="gradient-text">Heng </span> <span class="bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent font-bold">Heng</span><span class="text-white"> Chhim</span></span>
                 </h1>
             </div>
@@ -99,7 +113,7 @@
     <!-- ─── About ────────────────────────────────────────────────── -->
 
     <section id="about" class="min-h-dvh w-full flex items-center justify-center px-6 md:px-12 lg:px-16 py-20 bg-[#060c18] relative overflow-hidden">
-        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none">
+        <video autoplay loop muted playsinline webkit-playsinline preload="auto" class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none">
             <source src="videos/background2.mp4" type="video/mp4">
         </video>
         <div class="absolute inset-0 bg-[#060c18]/60 pointer-events-none"></div>
@@ -125,7 +139,7 @@
     <section id="skills" class="min-h-dvh w-full flex items-center justify-center px-6 md:px-12 lg:px-16 py-20 bg-[#0a0b12]">
         <div class="w-full max-w-5xl mx-auto">
             <p class="section-label font-mono text-sm font-medium text-amber-400 tracking-[0.15em] uppercase mb-3 flex items-center gap-3 reveal">02 — Skills</p>
-            <h2 class="font-sans text-[clamp(30px,10vw,50px)] font-bold text-slate-100 tracking-tight leading-tight mb-12 reveal whitespace-nowrap">Technologies I work with.</h2>
+            <h2 class="font-sans text-[clamp(24px,6vw,50px)] font-bold text-slate-100 tracking-tight leading-tight mb-12 reveal">Technologies I work with.</h2>
             <div class="skills-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5">
 
                 <div class="skill-card p-7 rounded-2xl bg-slate-900/40 border border-slate-800/50 hover:border-orange-500 hover:-translate-y-0.5 transition-all duration-300">

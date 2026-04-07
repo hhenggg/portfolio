@@ -63,6 +63,30 @@ function initVideoIntro() {
         return;
     }
 
+    // Force play on mobile — autoplay can silently fail
+    const tryPlay = () => {
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(() => {
+                // Autoplay blocked — skip to hero animations
+                gsap.set(blackOverlay, { opacity: 1 });
+                initHeroAnimations();
+            });
+        }
+    };
+
+    if (video.paused) {
+        tryPlay();
+        // Also retry on first user interaction (covers iOS restrictions)
+        const playOnce = () => {
+            if (video.paused) tryPlay();
+            document.removeEventListener('touchstart', playOnce);
+            document.removeEventListener('click', playOnce);
+        };
+        document.addEventListener('touchstart', playOnce, { once: true, passive: true });
+        document.addEventListener('click', playOnce, { once: true });
+    }
+
     let revealed = false;
     let replayTimeoutId;
 
@@ -360,7 +384,43 @@ function initSmoothNav() {
             if (target) {
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
+            // Close mobile menu on link click
+            closeMobileNav();
         });
+    });
+}
+
+/* ─── Mobile Nav Toggle ────────────────────────────────────────────── */
+
+function closeMobileNav() {
+    const toggle = document.getElementById('nav-toggle');
+    const mobileMenu = document.getElementById('nav-mobile');
+    if (!toggle || !mobileMenu) return;
+    mobileMenu.classList.add('hidden');
+    mobileMenu.classList.remove('flex');
+    toggle.querySelector('.hamburger-icon').classList.remove('hidden');
+    toggle.querySelector('.close-icon').classList.add('hidden');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+}
+
+function initMobileNav() {
+    const toggle = document.getElementById('nav-toggle');
+    const mobileMenu = document.getElementById('nav-mobile');
+    if (!toggle || !mobileMenu) return;
+
+    toggle.addEventListener('click', () => {
+        const isOpen = !mobileMenu.classList.contains('hidden');
+        if (isOpen) {
+            closeMobileNav();
+        } else {
+            mobileMenu.classList.remove('hidden');
+            mobileMenu.classList.add('flex');
+            toggle.querySelector('.hamburger-icon').classList.add('hidden');
+            toggle.querySelector('.close-icon').classList.remove('hidden');
+            toggle.setAttribute('aria-expanded', 'true');
+            document.body.style.overflow = 'hidden';
+        }
     });
 }
 
@@ -368,6 +428,7 @@ function initSmoothNav() {
 
 function initAnimations() {
     initNavScroll();
+    initMobileNav();
     initVideoIntro();
     initScrollReveals();
     initStaggerReveals();
